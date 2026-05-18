@@ -64,7 +64,7 @@ ORCID: Wei Shen Lim — \href{https://orcid.org/0009-0001-1406-7957}{0009-0001-1
 Keywords: guard cell size, leaf gas exchange, phylogenetic heritability, \textit{Solanum}, stomatal kinetics, vapor pressure deficit
 \end{center}
 
-\linenumbers
+% \linenumbers
 % \doublespacing
 \onehalfspacing
 ```
