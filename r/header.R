@@ -1,0 +1,65 @@
+rm(list = ls())
+
+# Suppress warnings for cleaner output during make runs
+options(warn = -1)
+
+source("r/functions.R")
+
+suppressPackageStartupMessages({
+  library(ape)
+  library(brms)
+  library(checkmate)
+  library(cowplot)
+  library(dplyr)
+  library(forcats)
+  library(furrr)
+  library(future)
+  library(ggh4x)
+  library(ggplot2)
+  library(ggpp)
+  library(ggpubr)
+  library(ggrepel)
+  library(glue)
+  library(magrittr)
+  library(patchwork)
+  library(posterior)
+  library(progress)
+  library(purrr)
+  library(readr)
+  library(RImageJROI)
+  library(scales)
+  library(sf)
+  library(smoothr)
+  library(stringr)
+  library(tibble)
+  library(tidybayes)
+  library(tidyr)
+  library(tikzDevice)
+  library(zip)
+})
+
+theme_set(theme_cowplot())
+
+form_cdweibull = gsw ~ gf + dg * exp(-(t_sec / tau) ^ lambda)
+
+# start convergence_criteria
+convergence_criteria = list(
+  rhat_max = 1.05,
+  ess_min = 400,
+  n_divergent = 10
+)
+# end convergence_criteria
+# 
+# There was a pretty clear break in the distribution of logtau_mean around 7.
+# Four curves above showed unusual patterns of stomatal closure based on visual
+# inspection.
+
+logtau_threshold = 7
+
+# Color schemes
+
+col_slow <- "#0072B2"
+col_fast <- "#D55E00"
+
+col_pseudohypo <- "#009E73"  # bluish green
+col_amphi <- "#CC79A7"  # reddish purple
