@@ -2,7 +2,7 @@
 
 This repository contains source code associated with the manuscript:
 
-Muir CD, WS Lim. Guard cell size and pore aperture influence stomatal closure kinetics. *In preparation*.
+Muir CD, WS Lim. Guard cell size and pore aperture influence stomatal closure kinetics. [*bioRxiv*](https://doi.org/10.64898/2026.05.17.725794).
 
 ## Author contributions
 
