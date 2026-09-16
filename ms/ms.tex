@@ -139,7 +139,7 @@
 \newcommand{\rhequals}[1]{$\mathrm{RH} = #1\%$}
 \newcommand{\tleafequals}[1]{$T_\mathrm{leaf} = \SI{#1}{\degreeCelsius}$}
 \usepackage{setspace}
-% \usepackage[modulo]{lineno}
+\usepackage[modulo]{lineno}
 \usepackage{physics}
 \usepackage{pifont}
 \newcommand{\cmark}{\ding{51}}
@@ -226,9 +226,9 @@ ORCID: Wei Shen Lim — \href{https://orcid.org/0009-0001-1406-7957}{0009-0001-1
 Keywords: guard cell size, leaf gas exchange, phylogenetic heritability, \textit{Solanum}, stomatal kinetics, vapor pressure deficit
 \end{center}
 
-% \linenumbers
+\linenumbers
 % \doublespacing
-% \onehalfspacing
+\onehalfspacing
 
 \newpage{}
 
@@ -383,8 +383,8 @@ describes how quickly stomata respond to the step change, and
 \(\lambda\) is a shape parameter that describes how the response rate
 changes over time. When \(\lambda = 1\), the response rate is constant
 over time and \(\tau\) represents the time required for \gsw{} to reach
-36.8\% (\(1/e\)) of the way between initial and final values. When
-\(\lambda > 1\), the response rate increases over time, and when
+63.2\% (\(1 - e^{-1}\)) of the way between initial and final values.
+When \(\lambda > 1\), the response rate increases over time, and when
 \(\lambda < 1\), the response rate decreases over time. Woning \emph{et
 al.} (2026) refer to \(\lambda\) as a lag-time parameter because
 empirically \(\lambda > 1\). We refer to stomatal kinetic parameters
@@ -1048,8 +1048,8 @@ and 59.1\% {[}95\% CI: 34.4\% to 75.5\%{]} of the variance, respectively
 (Figure~\ref{fig-variance}, Table~\ref{tbl-variance}). High measurement
 light intensity increased \gi{} by an average of \(113.2\)\% {[}95\% CI:
 \(107.7\)\% to \(118.5\)\%{]} (Figure~\ref{fig-accession-anatomy}b;
-Table~\ref{tbl-fixed}). Sun leaves had on average \(41.6\)\% {[}95\% CI:
-\(34.4\)\% to \(49.5\)\%{]} greater \gmax{} than shade-grown plants
+Table~\ref{tbl-fixed}). Sun leaves had on average \(83.3\)\% {[}95\% CI:
+\(79.5\)\% to \(87.1\)\%{]} greater \gmax{} than shade-grown plants
 (Figure~\ref{fig-accession-anatomy}b; Table~\ref{tbl-fixed}). The
 pseudohypo leaf type had on average \(-19.5\)\% {[}95\% CI: \(-21.5\)\%
 to \(-17.3\)\%{]} lower \gi{} than untreated, amphistomatous leaves
@@ -1069,11 +1069,11 @@ on one surface was not affected by blocking gas exchange in the other
 }
 
 \caption{\label{fig-variance}\textbf{Traits vary at different levels of biological organization}.
-A preponderance of the variation in guard cell length (\gcl), anatomical
-maximum stomatal conductance (\gmax), and the time constant \(\tau\) is
-phylogenetically structured among populations. In contrast, most of the
-variance in initial stomatal conductance (\gi) and the lag time
-(\(\lambda\)) is among individuals. Nonphylogenetic variation among
+A large fraction of the variation in guard cell length (\gcl),
+anatomical maximum stomatal conductance (\gmax), and the time constant
+\(\tau\) is phylogenetically structured among populations. In contrast,
+most of the variance in initial stomatal conductance (\gi) and the lag
+time (\(\lambda\)) is among individuals. Nonphylogenetic variation among
 populations was low for all traits.}
 
 \end{figure}%
@@ -1104,7 +1104,7 @@ populations was low for all traits.}
 \textbf{Guard cell length (\gcl) and stomatal conductance as a fraction of maximum conductance (\fgmax) vary among populations and treatments.}
 In both panels, black points are mean trait value per population within
 a particular treatment. Gray lines connect values within populations
-across treatments. (a) Most of the variation in \gcl{} is among
+across treatments. (a) Much of the variation in \gcl{} is among
 populations, but developmental plasticity to growth light intensity
 tends to increase \gcl{} in sun (right facet) compared to shade (left
 facet) grown plants. There is no plasticity to leaf type (amphi
@@ -1204,8 +1204,8 @@ estimates from the selected model. Individual-level fixed effects
 and \(\lambda\) were qualitatively consistent across all plausible
 models.
 
-Leaves with greater \gi{} closed more slowly than those which were less
-open (Figure~\ref{fig-gi-tau}; Table~\ref{tbl-fixed}). For example,
+Leaves with greater \gi{} closed more slowly than those with lower \gi{}
+(Figure~\ref{fig-gi-tau}; Table~\ref{tbl-fixed}). For example,
 increasing \gi{} from 0.2 to
 \(\SI{0.4}{\mole\per\meter\squared\per\second}\) resulted in a 25.1\%
 {[}95\% CI: 17.6\% to 32.6\%{]} increase in \(\tau\) for a typical leaf
@@ -1287,7 +1287,10 @@ indirect effects of high measurement light intensity increased \(\tau\).
 The direct effect increased \(\tau\) by \(8.56\)\% {[}95\% CI:
 \(1.40\)\% to \(16.40\)\%{]} and the indirect effect mediated by \gi{}
 increased \(\tau\) by \(27.62\)\% {[}95\% CI: \(19.18\)\% to
-\(36.24\)\%{]}.
+\(36.24\)\%{]}, for a combined total effect of \(38.59\)\% {[}95\% CI:
+\(35.29\)\% to \(41.74\)\%{]} (note that direct and indirect percentage
+effects combine additively on the log scale before back-transformation,
+so they do not simply sum on the percentage scale).
 
 \begin{figure}
 
@@ -1452,22 +1455,23 @@ developed methods (Brodersen \emph{et al.}, 2025) to directly evaluate
 the association between these traits.
 
 The impact of \gi{} was most pronounced when comparing measurement light
-intensity treatments. Leaves acclimated to high light intensity were on
-average 113\% more open than the same leaves at low light intensity in
-the reference treatment (shade, amphi). As a consequence, stomata closed
-more slowly in leaves acclimated to high light intensity, with a 27.6\%
-greater time constant on average in the reference treatment, based on
-parameter estimates from the selected model (Table~\ref{tbl-fixed}). We
-did not assess whether \gi{} also affects stomatal opening and this
-should be measured to further test this hypothesis. The implication is
-that natural selection should favor \gop{} values that not only optimize
-instantaneous carbon gain and water loss in the present environment, but
-also carbon gain and water loss integrated through time in a fluctuating
-environment. We predict that rapid, temporally-uncorrelated fluctuating
-environments will favor leaves with greater \gop{} to slow kinetic
-responses and prevent overreacting to transitory changes that are likely
-to revert; slower, temporally-correlated changes will favor lower \gop{}
-to enable close tracking of the environment.
+intensity treatments. Leaves acclimated to high light intensity had on
+average 113\% greater \gi{} than the same leaves at low light intensity
+in the reference treatment (shade, amphi). As a consequence, stomata
+closed more slowly in leaves acclimated to high light intensity, with a
+27.6\% greater time constant on average in the reference treatment,
+based on parameter estimates from the selected model
+(Table~\ref{tbl-fixed}). We did not assess whether \gi{} also affects
+stomatal opening and this should be measured to further test this
+hypothesis. The implication is that natural selection should favor
+\gop{} values that not only optimize instantaneous carbon gain and water
+loss in the present environment, but also carbon gain and water loss
+integrated through time in a fluctuating environment. We predict that
+rapid, temporally-uncorrelated fluctuating environments will favor
+leaves with greater \gop{} to slow kinetic responses and prevent
+overreacting to transitory changes that are likely to revert; slower,
+temporally-correlated changes will favor lower \gop{} to enable close
+tracking of the environment.
 
 The comparison between measurement light intensity treatments should be
 interpreted cautiously, however, because it was confounded with
@@ -2729,14 +2733,14 @@ potentially includes effects of \gcl, \gi{}, and \gmax{} on \(\tau\) and
 \hspace{1em}effect of sun growth treatment on $\log(\lambda)$ & 0.03 [0.01, 0.06]\\
 \hspace{1em}effect of high measurement light intensity on $\log(\lambda)$ & -0.02 [-0.04, 0.01]\\
 \hspace{1em}effect of pseudohypo leaf type on $\log(\lambda)$ & 0.01 [-0.00, 0.03]\\
-\hspace{1em}effect of loggi on $\log(\lambda)$ & 0.15 [0.11, 0.19]\\
+\hspace{1em}effect of $\log(g_\mathrm{i})$ on $\log(\lambda)$ & 0.15 [0.11, 0.19]\\
 \addlinespace[0.3em]
 \multicolumn{2}{l}{\textbf{$\log(\tau)$}}\\
 \hspace{1em}intercept (shade, low light, amphi) & 5.58 [5.24, 5.91]\\
 \hspace{1em}effect of sun growth treatment on $\log(\tau)$ & -0.11 [-0.16, -0.06]\\
 \hspace{1em}effect of high measurement light intensity on $\log(\tau)$ & 0.08 [0.01, 0.15]\\
 \hspace{1em}effect of pseudohypo leaf type on $\log(\tau)$ & 0.08 [0.05, 0.11]\\
-\hspace{1em}effect of loggi on $\log(\tau)$ & 0.32 [0.23, 0.41]\\*
+\hspace{1em}effect of $\log(g_\mathrm{i})$ on $\log(\tau)$ & 0.32 [0.23, 0.41]\\*
 
 \end{longtable}
 
@@ -3188,11 +3192,11 @@ cor(\(\lambda\)) = 1.00), and computed the correlation between the
 \emph{estimated} \gi{} and \(\log(\tau)\). We repeated this 1,000 times
 to build a null distribution of this correlation.
 
-The null-simulation correlations ranged from -0.06 to 0.09 (median
-\(-3.1 \times 10^{-3}\)) across the 1,000 replicates, indistinguishable
+The null-simulation correlations ranged from -0.08 to 0.08 (median
+\(-3 \times 10^{-3}\)) across the 1,000 replicates, indistinguishable
 from zero (Figure~\ref{fig-null-sim-fgmax-tau}). In contrast, the real,
-observed correlation between \gi{} and \(\log(\tau)\) is 0.39 {[}0.35,
-0.42{]}, far outside the null range (empirical \(p\) = 0.000). This
+observed correlation between \gi{} and \(\log(\tau)\) is 0.43 {[}0.39,
+0.46{]}, far outside the null range (empirical \(p\) = 0.000). This
 indicates that the curve-fitting procedure alone cannot explain the
 observed \gi{}-\(\tau\) association, supporting our interpretation that
 it reflects a real relationship in the data rather than a statistical
