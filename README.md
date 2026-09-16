@@ -1,5 +1,8 @@
 # solanum-kinetics
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22802259.svg)](https://doi.org/10.5281/zenodo.22802259)
+[![DOI](https://img.shields.io/badge/Data%20on-Dryad-cc79a7)](https://doi.org/10.5061/dryad.f7m0cfzcv)
+
 This repository contains source code associated with the manuscript:
 
 Muir CD, WS Lim. Guard cell size and initial conductance influence stomatal closure kinetics. [*bioRxiv*](https://doi.org/10.64898/2026.05.17.725794).
