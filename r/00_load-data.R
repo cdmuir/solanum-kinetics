@@ -41,7 +41,53 @@ solanum_aa_url <- function(ref, path) {
 # accession-info.rds / plant-info.rds: as of 2025-10-21 ("updating data")
 ACCESSION_PLANT_INFO_REF <- "a1b5a64d2ebe1f734cb66b38ad68d70c5025162c"
 
+authorities <- tibble(
+  species = c(
+    "S. arcanum",
+    "S. cheesmaniae",
+    "S. chilense",
+    "S. chmielewskii",
+    "S. corneliomulleri",
+    "S. galapagense",
+    "S. habrochaites",
+    "S. huaylasense",
+    "S. juglandifolium",
+    "S. lycopersicoides",
+    "S. lycopersicum",
+    "S. nelsonii",
+    "S. neorickii",
+    "S. ochranthum",
+    "S. pennellii",
+    "S. peruvianum",
+    "S. pimpinellifolium",
+    "S. sandwicense",
+    "S. sitiens"
+  ),
+  authority = c(
+    "Peralta",
+    "(L. Riley) Fosberg",
+    "(Dunal) Reiche",
+    "(C. M. Rick et al.) D. M. Spooner et al.",
+    "J. F. Macbr.",
+    "S. C. Darwin \\& Peralta",
+    "S. Knapp \\& D. M. Spooner",
+    "Peralta",
+    "Dunal",
+    "Dunal",
+    "L.",
+    "Dunal",
+    "D. M. Spooner et al.",
+    "Dunal",
+    "Correll",
+    "L.",
+    "L.",
+    "Hook. \\& Arn.",
+    "I. M. Johnst."
+  )
+)
+
 read_rds(solanum_aa_url(ACCESSION_PLANT_INFO_REF, "data/accession-info.rds")) |>
+  left_join(authorities, by = join_by(species)) |>
   write_rds("data/accession_info.rds")
 
 read_rds(solanum_aa_url(ACCESSION_PLANT_INFO_REF, "data/plant-info.rds")) |>

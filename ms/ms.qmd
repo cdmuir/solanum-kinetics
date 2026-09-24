@@ -61,6 +61,8 @@ ORCID: Wei Shen Lim — \href{https://orcid.org/0009-0001-1406-7957}{0009-0001-1
 Keywords: guard cell size, leaf gas exchange, phylogenetic heritability, \textit{Solanum}, stomatal kinetics, vapor pressure deficit
 \end{center}
 
+Running head: Guard cell size, initial conductance, and stomatal kinetics
+
 % \linenumbers
 % \onehalfspacing
 ```
@@ -513,7 +515,7 @@ As noted above, we are opportunistically analyzing data from an experiment desig
 
 ### Populations and phylogeny
 
-We grew `r n_acc` populations of wild tomato (@tbl-populations), including representatives of all described species of *Solanum* sect. *Lycopersicon* and sect. *Lycopersicoides* [@peralta_taxonomy_2008], as described in @muir_plasticity_2025. These populations were selected because they encompass the breadth of climatic variation in the wild tomato clade [@pease_phylogenomics_2016]. Due to constraints on growth space and time, we spread out measurements over `r n_weeks` weeks. Replicates within population were evenly spread out over this period to prevent confounding of temporal variation in growth conditions with variation among populations. For phylogenetic comparative analyses, we used the RAxML whole-transcriptome concatenated phylogeny based on 2,745 100-kb genomic windows from @pease_phylogenomics_2016. Two of our populations were not in this tree. We used *S. galapagense* accession LA1044 in place of LA3909. *S. pennellii* accession LA0750 was added as sister to LA0716. The node separating LA0750 from LA0716 was placed halfway along the branch to the next deepest node. 
+We grew `r n_acc` populations of wild tomato (@tbl-populations), including representatives of all described species of *Solanum* sect. *Lycopersicon* and sect. *Lycopersicoides* [@peralta_taxonomy_2008], as described in @muir_plasticity_2025. These populations were selected because they encompass the breadth of climatic variation in the wild tomato clade [@pease_phylogenomics_2016]. Due to constraints on growth space and time, we spread out measurements over `r n_weeks` weeks. Replicates within population were evenly spread out over this period to prevent confounding of temporal variation in growth conditions with variation among populations. For phylogenetic comparative analyses, we used the RAxML whole-transcriptome concatenated phylogeny based on 2,745 100-kb genomic windows from @pease_phylogenomics_2016. Two of our populations were not in this tree. We used *S. galapagense* S.C. Darwin & Peralta accession LA1044 in place of LA3909. *S. pennellii* Correll accession LA0750 was added as sister to LA0716. The node separating LA0750 from LA0716 was placed halfway along the branch to the next deepest node. 
 
 ### Plant growth conditions and light treatments
 
@@ -853,8 +855,9 @@ All data and code are available on GitHub (\url{https://github.com/cdmuir/solanu
 accession_info |>
   filter(accession %in% joined_data$acc) |>
   arrange(species, accession) |>
+  mutate(Species = glue("{species} {authority}")) |>
   select(
-    Species = species,
+    Species,
     `TGRC accession` = accession,
     `Latitude` = lat,
     `Longitude` = lon,
