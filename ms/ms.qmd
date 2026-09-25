@@ -759,9 +759,11 @@ All data and code are available on GitHub (\url{https://github.com/cdmuir/solanu
 ::: {#refs}
 :::
 
+{{< pagebreak >}}
+
 ## ALT TEXT figures
 
-**Figure 1.** Four-panel conceptual diagram. Panel a: stomatal conductance over time after a step increase in vapor pressure deficit, showing a brief rise (wrong-way response) followed by a decline to a lower steady state (right-way response); a dashed curve shows a Weibull function fit to the decline, with initial and final conductance values marked. Panel b: two decline curves showing how the lag-time parameter changes the response shape — one a smooth, roughly exponential decline and one an S-shaped, accelerating decline. Panel c: side-by-side schematic cross-sections of a small and a large guard cell, illustrating that smaller cells have a greater surface-area-to-volume ratio. Panel d: a saturating curve of stomatal conductance versus guard cell turgor pressure, with tangent lines at two points showing the slope is steeper at low conductance (low fraction of maximum conductance) and shallower at high conductance (high fraction of maximum conductance).
+**Figure 1.** Four-panel conceptual diagram. Panel a: stomatal conductance over time after a step increase in vapor pressure deficit, showing a brief rise (wrong-way response) followed by a decline to a lower steady state (right-way response); an orange curve shows a Weibull function fit to the decline, with initial and final conductance values marked. Panel b: four decline curves showing how the time-constant and lag-time parameters change the response shape. The smooth, roughly exponential declines, have low lag time at different rates; the two S-shaped curves show accelerating decline at different rates after a lag. Panel c: Two curves showing faster closure kinetics in smaller guard cells with greater surface area surface-area-to-volume ratio. Panel d: a saturating curve of stomatal conductance versus guard cell turgor pressure, with tangent lines at two points showing the slope is steeper at low conductance (low fraction of maximum conductance) and shallower at high conductance (high fraction of maximum conductance).
 
 **Figure 2.** Horizontal stacked bar chart showing the percentage of variance apportioned among three hierarchical levels — phylogenetic, non-phylogenetic population, and among-individual — for five traits: guard cell length, anatomical maximum stomatal conductance, the stomatal closure time constant, initial stomatal conductance, and the lag time. Guard cell length, maximum conductance, and the time constant have long phylogenetic segments, whereas initial conductance and lag time have long among-individual segments; the non-phylogenetic population segment is comparatively short for every trait.
 
@@ -771,13 +773,17 @@ All data and code are available on GitHub (\url{https://github.com/cdmuir/solanu
 
 **Figure 5.** Scatter plot of guard cell length (horizontal axis, log scale) against the stomatal closure time constant (vertical axis, log scale) for wild tomato populations, arranged in a two-by-two grid of facets by growth light intensity (columns) and measurement light intensity (rows). Points are colored by leaf type (amphistomatous vs. pseudohypostomatous) and overlaid with colored ellipses representing the phylogenetic covariance between the two traits in each treatment combination; the ellipses are tilted with a positive slope in every facet.
 
-**Figure 6.** Scatter plot of initial stomatal conductance (horizontal axis) against the stomatal closure time constant (vertical axis) for individual leaves, arranged in a two-by-two grid of facets by growth light intensity (columns) and measurement light intensity (rows). Points are colored by leaf type (amphistomatous vs. pseudohypostomatous), each with a fitted straight regression line and shaded confidence band showing a positive relationship between initial conductance and the time constant in every facet.
+**Figure 6.** Scatter plot of initial stomatal conductance (horizontal axis) against the stomatal closure time constant (vertical axis) for individual leaves, arranged in a two-by-two grid of facets by growth light intensity (columns) and measurement light intensity (rows). Points are colored by leaf type (amphistomatous vs. pseudohypostomatous), each with a fitted straight regression line and shaded confidence ribbon showing a positive relationship between initial conductance and the time constant in every facet.
 
 **Figure 7.** Path diagram with three stacked panels, one for each experimental treatment: growth light intensity (top), leaf type (middle), and measurement light intensity (bottom). In each panel, a horizontal arrow represents the direct effect of the treatment on the stomatal closure time constant, and a pair of slanted arrows passing through a node for initial stomatal conductance represents the indirect effect. Arrow thickness is scaled to effect size, and arrows are colored red for negative effects or blue for positive effects, with numeric effect estimates and confidence intervals labeled above each arrow.
 
 {{< pagebreak >}}
 
 ## Supporting Information legends
+
+```{=latex}
+\begin{flushleft}
+```
 
 **Table S1.** Accession information of *Solanum* populations used in this study.
 
@@ -838,6 +844,10 @@ associated with each population and treatment combination.
 **Notes S2.** The $g_\mathrm{i}$–$\tau$ association is not an artifact of the curve-fitting procedure.
 
 **Notes S3.** Sensitivity analysis of the $g_\mathrm{i}$–$\tau$ path analysis to unmeasured confounding.
+
+```{=latex}
+\end{flushleft}
+```
 
 {{< pagebreak >}}
 
@@ -1393,8 +1403,7 @@ knitr::include_graphics("../figures/compare-gsw.pdf")
 ```
 
 ::: {#fig-rh-curves}
-**Figure file:**  
-Download from: \url{https://github.com/cdmuir/solanum-kinetics/raw/refs/heads/main/figures/rh-curves.pdf}
+**Figure file:** `Figure S6.pdf`
 
 **Humidity-response curves and fitted lines.** The title provides the Tomato Genetics Resource Center accession number, replicate letter, and species names. The subtitle indicates the growth light intensity (sun or shade), measurement light intensity (low or high), and leaf type (amphi or pseudohypo). Points are raw data and lines are fitted curves. The Bayesian correlation coefficient, $\mathrm{Bayes}~R^2$, is shown to the right of each curve.
 :::

@@ -1,5 +1,4 @@
 % Options for packages loaded elsewhere
-% Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
@@ -8,22 +7,21 @@
   letterpaper,
   DIV=11,
   numbers=noendperiod]{scrartcl}
-\usepackage{xcolor}
+
 \usepackage{amsmath,amssymb}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else
-  % xetex/luatex font selection
+\ifPDFTeX\else  
+    % xetex/luatex font selection
   \setmainfont[]{Times New Roman}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
@@ -32,33 +30,22 @@
   \usepackage[]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
-\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}{
-    \@ifstar
-      \xxxParagraphStar
-      \xxxParagraphNoStar
-  }
-  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
-  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}{
-    \@ifstar
-      \xxxSubParagraphStar
-      \xxxSubParagraphNoStar
-  }
-  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
-  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
-\makeatother
 
 
-\usepackage{longtable,booktabs,array}
-\newcounter{none} % for unnumbered tables
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -70,21 +57,17 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\newsavebox\pandoc@box
-\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
-  \sbox\pandoc@box{#1}%
-  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
-  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
-  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
-  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
-  \else\usebox{\pandoc@box}%
-  \fi%
-}
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 % Set default figure placement to htbp
+\makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
-
 % definitions for citeproc citations
 \NewDocumentCommand\citeproctext{}{}
 \NewDocumentCommand\citeproc{mm}{%
@@ -118,18 +101,6 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
-
-
-
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
-
-
- 
-
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -220,13 +191,13 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 \usepackage{bookmark}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-% fallback for those not using the hyperref driver hyperxmp:
-\makeatletter
-\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
-\makeatother
+\urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={Guard cell size and initial conductance influence stomatal closure kinetics},
   pdfauthor={Christopher D. Muir\^{}\{1,2*\}; Wei Shen Lim\^{}\{1\}},
@@ -237,14 +208,13 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
-
 \title{Guard cell size and initial conductance influence stomatal
 closure kinetics}
 \author{Christopher D. Muir\(^{1,2*}\) \and Wei Shen Lim\(^{1}\)}
 \date{}
+
 \begin{document}
 \maketitle
-
 
 \begin{center}
 $^1$School of Life Sciences, University of Hawaiʻi; Mānoa, Hawaiʻi, USA\\
@@ -405,7 +375,7 @@ al.}, 2016). A four-parameter equation describes stomatal response
 kinetics to a step change in light intensity across dozens of plant
 species (Woning \emph{et al.}, 2026):
 
-\begin{equation}\protect\phantomsection\label{eq-weibull}{
+\begin{equation}\phantomsection\label{eq-weibull}{
   g_\mathrm{sw,t} = g_\mathrm{f} + (g_\mathrm{i} - g_\mathrm{f}) e^{-\left(\frac{t}{\tau}\right)^\lambda}.
 }\end{equation}
 
@@ -497,7 +467,7 @@ likely variation within and among species and growth forms in the
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/conceptual.pdf}}
+\includegraphics{../figures/conceptual.pdf}
 
 }
 
@@ -796,8 +766,9 @@ that the estimated \gi{} was a good proxy for stomatal conductance at
 the time of the step change in humidity. Because \gi{} is estimated from
 the same nonlinear fit as \(\tau\) and \(\lambda\), we used a null
 simulation to confirm that this does not, by itself, induce a spurious
-\fgmax{}-\(\tau\) association (Notes S2). We used the anatomical \gmax{}
-for the surface(s) measured in each curve to calculate \fgmax. For amphi
+\fgmax{}-\(\tau\) association (Notes S2;
+Figure~\ref{fig-null-sim-fgmax-tau}). We used the anatomical \gmax{} for
+the surface(s) measured in each curve to calculate \fgmax. For amphi
 curves, we used the sum of adaxial and abaxial \gmax{}; for pseudohypo
 curves, we used only the abaxial \gmax{}. Although \gmax{} calculated
 this way is a theoretical upper bound based on stomatal geometry rather
@@ -968,14 +939,15 @@ the same curve as \(\tau\), and could share unmeasured confounders
 (e.g., hydraulic status, measurement order, realized VPD trajectory)
 with \(\tau\), violating the sequential ignorability assumption required
 for a causal interpretation. We assessed the plausibility of this
-assumption directly with a sensitivity analysis (Notes S3). We inferred
-the direct effect of treatments on \(\tau\) from model coefficients. We
-estimated the indirect effect of treatments as the product of the effect
-of treatment on \gi{} and the effect of that trait on \(\tau\) (Imai
-\emph{et al.}, 2010). We determined significant direct and indirect
-effects based on whether the 95\% confidence intervals of the effects
-were different than zero. We calculated effect sizes as the point
-estimate (median of the posterior) divided by the standard error
+assumption directly with a sensitivity analysis (Notes S3;
+Figure~\ref{fig-mediation-dag}; Figure~\ref{fig-mediation-sensitivity}).
+We inferred the direct effect of treatments on \(\tau\) from model
+coefficients. We estimated the indirect effect of treatments as the
+product of the effect of treatment on \gi{} and the effect of that trait
+on \(\tau\) (Imai \emph{et al.}, 2010). We determined significant direct
+and indirect effects based on whether the 95\% confidence intervals of
+the effects were different than zero. We calculated effect sizes as the
+point estimate (median of the posterior) divided by the standard error
 (standard deviation of the posterior).
 
 \subsubsection{Variance decomposition and phylogenetic
@@ -1097,17 +1069,17 @@ on one surface was not affected by blocking gas exchange in the other
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/variance.pdf}}
+\includegraphics{../figures/variance.pdf}
 
 }
 
 \caption{\label{fig-variance}\textbf{Traits vary at different levels of biological organization}.
 A large fraction of the variation in guard cell length (\gcl),
 anatomical maximum stomatal conductance (\gmax), and the time constant
-\(\tau\) is phylogenetically structured among populations. In contrast,
-most of the variance in initial stomatal conductance (\gi) and the lag
-time (\(\lambda\)) is among individuals. Nonphylogenetic variation among
-populations was low for all traits.}
+\(\tau\) is phylogenetically structured among \textit{Solanum}
+populations. In contrast, most of the variance in initial stomatal
+conductance (\gi) and the lag time (\(\lambda\)) is among individuals.
+Nonphylogenetic variation among populations was low for all traits.}
 
 \end{figure}%
 
@@ -1115,7 +1087,7 @@ populations was low for all traits.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/accession-anatomy.pdf}}
+\includegraphics{../figures/accession-anatomy.pdf}
 
 }
 
@@ -1129,12 +1101,12 @@ populations was low for all traits.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{ms_files/figure-pdf/fig-accession-anatomy-cap-1.pdf}}
+\includegraphics{ms_files/figure-pdf/fig-accession-anatomy-cap-1.pdf}
 
 }
 
 \caption{\label{fig-accession-anatomy-cap}(previous page)
-\textbf{Guard cell length (\gcl) and stomatal conductance as a fraction of maximum conductance (\fgmax) vary among populations and treatments.}
+\textbf{Guard cell length (\gcl) and stomatal conductance as a fraction of maximum conductance (\fgmax) vary among \textit{Solanum} populations and treatments.}
 In both panels, black points are mean trait value per population within
 a particular treatment. Gray lines connect values within populations
 across treatments. (a) Much of the variation in \gcl{} is among
@@ -1181,7 +1153,7 @@ to 1.39\%{]}.
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/accession-kinetics.pdf}}
+\includegraphics{../figures/accession-kinetics.pdf}
 
 }
 
@@ -1262,11 +1234,11 @@ plausible causal effect of \gcl{} on \(\tau\) among populations.
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/gcl-tau.pdf}}
+\includegraphics{../figures/gcl-tau.pdf}
 
 }
 
-\caption{\label{fig-gcl-tau}\textbf{Phylogenetic covariance between guard cell length (\gcl, $x$-axis) and the stomatal closure time constant ($\tau$, $y$-axis) indicates that populations with larger stomata tend to close more slowly in response to humidity.}
+\caption{\label{fig-gcl-tau}\textbf{Phylogenetic covariance between guard cell length (\gcl, $x$-axis) and the stomatal closure time constant ($\tau$, $y$-axis) indicates that \text{Solanum} populations with larger stomata tend to close more slowly in response to humidity.}
 The overall pattern was consistent across growth light intensity
 treatments (left and right facets), measurement light intensity
 treatments (top and bottom facets), and leaf types (point colors). The
@@ -1285,7 +1257,7 @@ section.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/gi-tau.pdf}}
+\includegraphics{../figures/gi-tau.pdf}
 
 }
 
@@ -1294,9 +1266,10 @@ As \gi{} (\(x\)-axis) increases, the stomatal closure time constant
 (\(\tau\), \(y\)-axis) increases. The overall pattern was consistent
 across grow light intensity treatments (left and right facets),
 measurement light intensity treatments (top and bottom facets), and leaf
-types (point colors). Lines are estimated using linear regression along
-with 95\% confidence ribbons. The growth and measurement light intensity
-treatments are described in the Materials and Methods section.}
+types (point colors) in \textit{Solanum} populations. Lines are
+estimated using linear regression along with 95\% confidence ribbons.
+The growth and measurement light intensity treatments are described in
+the Materials and Methods section.}
 
 \end{figure}%
 
@@ -1329,11 +1302,11 @@ so they do not simply sum on the percentage scale).
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/mediation.pdf}}
+\includegraphics{../figures/mediation.pdf}
 
 }
 
-\caption{\label{fig-mediation}\textbf{Treatment-associated plasticity in the time constant $\tau$ is statistically consistent with an indirect path through initial stomatal conductance (\gi).}
+\caption{\label{fig-mediation}\textbf{Treatment-associated plasticity in the time constant $\tau$ is statistically consistent with an indirect path through initial stomatal conductance (\gi) in \textit{Solanum} populations.}
 The three treatments are growth light intensity (top facet; shade
 vs.~sun), leaf type (middle facet; amphi vs.~pseudohypo), and
 measurement light intensity (bottom facet; low vs.~high). Horizontal
@@ -1594,7 +1567,7 @@ on Zenodo (\url{https://doi.org/10.5281/zenodo.22802259}).
 
 \singlespacing
 
-\protect\phantomsection\label{refs}
+\phantomsection\label{refs}
 \begin{CSLReferences}{0}{1}
 \bibitem[\citeproctext]{ref-aasamaa_stomatal_2011}
 \textbf{\textbf{Aasamaa K}, \textbf{Sõber A}}. \textbf{2011a}.
@@ -2372,9 +2345,180 @@ diverse tomato species across geographical habitats} (T Lawson, Ed.).
 
 \end{CSLReferences}
 
+\subsection{ALT TEXT figures}\label{alt-text-figures}
+
+\textbf{Figure 1.} Four-panel conceptual diagram. Panel a: stomatal
+conductance over time after a step increase in vapor pressure deficit,
+showing a brief rise (wrong-way response) followed by a decline to a
+lower steady state (right-way response); a dashed curve shows a Weibull
+function fit to the decline, with initial and final conductance values
+marked. Panel b: two decline curves showing how the lag-time parameter
+changes the response shape --- one a smooth, roughly exponential decline
+and one an S-shaped, accelerating decline. Panel c: side-by-side
+schematic cross-sections of a small and a large guard cell, illustrating
+that smaller cells have a greater surface-area-to-volume ratio. Panel d:
+a saturating curve of stomatal conductance versus guard cell turgor
+pressure, with tangent lines at two points showing the slope is steeper
+at low conductance (low fraction of maximum conductance) and shallower
+at high conductance (high fraction of maximum conductance).
+
+\textbf{Figure 2.} Horizontal stacked bar chart showing the percentage
+of variance apportioned among three hierarchical levels ---
+phylogenetic, non-phylogenetic population, and among-individual --- for
+five traits: guard cell length, anatomical maximum stomatal conductance,
+the stomatal closure time constant, initial stomatal conductance, and
+the lag time. Guard cell length, maximum conductance, and the time
+constant have long phylogenetic segments, whereas initial conductance
+and lag time have long among-individual segments; the non-phylogenetic
+population segment is comparatively short for every trait.
+
+\textbf{Figure 3.} Two-panel figure of population-level trait means
+across experimental treatments, with points for each wild tomato
+population connected by thin gray lines across treatment levels. Panel
+a: guard cell length values arranged by growth light intensity (shade,
+sun) and leaf type. Panel b: the fraction of anatomical maximum stomatal
+conductance arranged by measurement light intensity and leaf type.
+
+\textbf{Figure 4.} Faceted dot plot arranged in a two-by-two grid. Rows
+show the two kinetic parameters, lag time (top) and time constant
+(bottom); columns show the growth light treatment (shade, left; sun,
+right). Within each panel, points represent the average value for one
+wild tomato population under low or high measurement light intensity,
+allowing comparison of parameter values across light intensities and
+growth treatments.
+
+\textbf{Figure 5.} Scatter plot of guard cell length (horizontal axis,
+log scale) against the stomatal closure time constant (vertical axis,
+log scale) for wild tomato populations, arranged in a two-by-two grid of
+facets by growth light intensity (columns) and measurement light
+intensity (rows). Points are colored by leaf type (amphistomatous
+vs.~pseudohypostomatous) and overlaid with colored ellipses representing
+the phylogenetic covariance between the two traits in each treatment
+combination; the ellipses are tilted with a positive slope in every
+facet.
+
+\textbf{Figure 6.} Scatter plot of initial stomatal conductance
+(horizontal axis) against the stomatal closure time constant (vertical
+axis) for individual leaves, arranged in a two-by-two grid of facets by
+growth light intensity (columns) and measurement light intensity (rows).
+Points are colored by leaf type (amphistomatous
+vs.~pseudohypostomatous), each with a fitted straight regression line
+and shaded confidence band showing a positive relationship between
+initial conductance and the time constant in every facet.
+
+\textbf{Figure 7.} Path diagram with three stacked panels, one for each
+experimental treatment: growth light intensity (top), leaf type
+(middle), and measurement light intensity (bottom). In each panel, a
+horizontal arrow represents the direct effect of the treatment on the
+stomatal closure time constant, and a pair of slanted arrows passing
+through a node for initial stomatal conductance represents the indirect
+effect. Arrow thickness is scaled to effect size, and arrows are colored
+red for negative effects or blue for positive effects, with numeric
+effect estimates and confidence intervals labeled above each arrow.
+
+\newpage{}
+
+\subsection{Supporting Information
+legends}\label{supporting-information-legends}
+
+\begin{flushleft}
+
+\textbf{Table S1.} Accession information of \emph{Solanum} populations
+used in this study.
+
+\textbf{Table S2.} Relative humidity and vapor pressure deficit during
+stomatal kinetics measurements.
+
+\textbf{Table S3.} Total number of humidity response curves analyzed by
+treatment combination.
+
+\textbf{Table S4.} Model comparison results for fixed effect of guard
+cell length and \fgmax{} components on kinetic parameters.
+
+\textbf{Table S5.} Leave-one-out cross-validation information criteria
+(LOOIC) for plausible models.
+
+\textbf{Table S6.} Relative contributions of phylogenetic, among
+population (nonphylogenetic), and among individual varation among
+stomatal traits.
+
+\textbf{Table S7.} Fixed effect parameter estimates from the selected
+Bayesian model.
+
+\textbf{Table S8.} Estimates of stomatal anatomy and kinetic variables
+associated with each curve.
+
+\textbf{Table S9.} Estimates of stomatal anatomy and kinetic variables
+associated with each population and treatment combination.
+
+\textbf{Table S10.} Random effect parameter estimates from the selected
+Bayesian model.
+
+\textbf{Figure S1.} Pairwise relationships among vapor pressure deficit
+(VPD) covariates.
+
+\textbf{Figure S2.} Correlation between stomatal closure time constant
+\(\tau\) and the inverse VPD saturation rate.
+
+\textbf{Figure S3.} Vapor pressure deficit saturation rate in sample and
+references airstreams.
+
+\textbf{Figure S4.} Estimated effects of \(g_\mathrm{i}\) on \(\tau\)
+and phylogenetic correlation between guard cell length and \(\tau\) in
+selected model and VPD-adjusted model.
+
+\textbf{Figure S5.} Estimated and observed maximum stomatal
+conductances.
+
+\textbf{Figure S6.} Humidity-response curves and fitted lines.
+
+\textbf{Figure S7.} Comparison of adaxial and abaxial guard cell lengths
+among populations.
+
+\textbf{Figure S8.} Individual-level effects across plausible models.
+
+\textbf{Figure S9.} Phylogenetic correlations across plausible models.
+
+\textbf{Figure S10.} Posterior estimates of phylogenetic correlations
+and fixed effects of guard cell length on \(\tau\).
+
+\textbf{Figure S11.} Individual-level variation in maximum conductance
+and the time constant \(\tau\).
+
+\textbf{Figure S12.} Individual-level variation in initial conductance
+influences lag time \(\lambda\).
+
+\textbf{Figure S13.} Individual-level variation in the anatomical
+maximum conductance does not influence lag time \(\lambda\).
+
+\textbf{Figure S14.} Comparison of the observed
+\(g_\mathrm{i}\)--\(\tau\) correlation against a null distribution.
+
+\textbf{Figure S15.} Causal structure of the \(g_\mathrm{i}\)--\(\tau\)
+path analysis and unmeasured confounding.
+
+\textbf{Figure S16.} Sensitivity of indirect treatment effects on
+\(\tau\) through \(g_\mathrm{i}\) to residual correlation assumptions.
+
+\textbf{Notes S1.} Effects of \(g_\mathrm{i}\) and guard cell length are
+robust to variation in VPD stimulus.
+
+\textbf{Notes S2.} The \(g_\mathrm{i}\)--\(\tau\) association is not an
+artifact of the curve-fitting procedure.
+
+\textbf{Notes S3.} Sensitivity analysis of the
+\(g_\mathrm{i}\)--\(\tau\) path analysis to unmeasured confounding.
+
+\end{flushleft}
+
 \newpage{}
 
 \section{Supporting Information}\label{supporting-information}
+
+\noindent New Phytologist Supporting Information\\
+Article title: Guard cell size and initial conductance influence stomatal closure kinetics\\
+Authors: Christopher D. Muir, Wei Shen Lim\\
+Article acceptance date: 18 September 2026
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 \renewcommand{\thetable}{S\arabic{table}}
@@ -2785,17 +2929,12 @@ potentially includes effects of \gcl, \gi{}, and \gmax{} on \(\tau\) and
 
 \begin{table}
 
-\caption{\label{tbl-estimates-curve}Raw data file in CSV format
-containing estimates of stomatal anatomy and kinetic variables
-associated with each curve. These are raw data for fitting multiresponse
-models. A final version will be deposited on Dryad after acceptance.
-This version is available for reviewers.}
+\caption{\label{tbl-estimates-curve}}
 
 \centering{
 
-\textbf{Table file:}\\
-Download from:
-\url{https://github.com/cdmuir/solanum-kinetics/raw/refs/heads/main/tables/tbl-estimates-curve.csv}
+\captionsetup{labelsep=none}\textbf{Table file:}
+\texttt{Table\ S8\_estimates-curve.xlsx}
 
 }
 
@@ -2803,17 +2942,12 @@ Download from:
 
 \begin{table}
 
-\caption{\label{tbl-estimates-accession}Raw data file in CSV format
-containing estimates of stomatal anatomy and kinetic variables
-associated with each population based on multiresponse model
-predictions. A final version will be deposited on Dryad after
-acceptance. This version is available for reviewers.}
+\caption{\label{tbl-estimates-accession}}
 
 \centering{
 
-\textbf{Table file:}\\
-Download from:
-\url{https://github.com/cdmuir/solanum-kinetics/raw/refs/heads/main/tables/tbl-estimates-accession.csv}
+\captionsetup{labelsep=none}\textbf{Table file:}
+\texttt{Table\ S9\_estimates-accession.xlsx}
 
 }
 
@@ -2898,7 +3032,7 @@ traits.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/vpd-pairs.pdf}}
+\includegraphics{../figures/vpd-pairs.pdf}
 
 }
 
@@ -2917,7 +3051,7 @@ Notes S1).}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/tau-vpd-rate.pdf}}
+\includegraphics{../figures/tau-vpd-rate.pdf}
 
 }
 
@@ -2934,7 +3068,7 @@ line us ordinary least-squares regression fit.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/vpd-h2o-rate.pdf}}
+\includegraphics{../figures/vpd-h2o-rate.pdf}
 
 }
 
@@ -2952,7 +3086,7 @@ constants come from the same saturating-exponential model used for VPD.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/vpd-comparison.pdf}}
+\includegraphics{../figures/vpd-comparison.pdf}
 
 }
 
@@ -2969,7 +3103,7 @@ covariate of \(\tau\) and \(\lambda\) (pink; see Notes S1).}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/compare-gsw.pdf}}
+\includegraphics{../figures/compare-gsw.pdf}
 
 }
 
@@ -2984,9 +3118,7 @@ line for reference. Both axes are on a log-scale.}
 
 \centering{
 
-\textbf{Figure file:}\\
-Download from:
-\url{https://github.com/cdmuir/solanum-kinetics/raw/refs/heads/main/figures/rh-curves.pdf}
+\textbf{Figure file:} \texttt{Figure\ S6.pdf}
 
 }
 
@@ -3005,16 +3137,16 @@ curve.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/gcl.pdf}}
+\includegraphics{../figures/gcl.pdf}
 
 }
 
 \caption{\label{fig-gcl}\textbf{Adaxial (upper) stomata are consistently larger than abaxial (lower) stomata in both sun-grown (grey points) and shade-grown (black points) plants.}
 Each point was calculated by taking the median guard cell length within
 each biological replicate and then calculating the mean among replicates
-within each population and growth light intensity treatment. The dashed
-line is the 1:1 line for reference. All points above this line indicate
-larger values on the adaxial surface.}
+within each \textit{Solanum} population and growth light intensity
+treatment. The dashed line is the 1:1 line for reference. All points
+above this line indicate larger values on the adaxial surface.}
 
 \end{figure}%
 
@@ -3022,7 +3154,7 @@ larger values on the adaxial surface.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/estimates-b.pdf}}
+\includegraphics{../figures/estimates-b.pdf}
 
 }
 
@@ -3040,7 +3172,7 @@ overlap zero.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/estimates-phy.pdf}}
+\includegraphics{../figures/estimates-phy.pdf}
 
 }
 
@@ -3058,7 +3190,7 @@ intervals that overlap zero.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/collinear.pdf}}
+\includegraphics{../figures/collinear.pdf}
 
 }
 
@@ -3077,7 +3209,7 @@ parameter.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/gmax-tau.pdf}}
+\includegraphics{../figures/gmax-tau.pdf}
 
 }
 
@@ -3095,7 +3227,7 @@ treatments are described in the Materials and Methods section.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/gi-lambda.pdf}}
+\includegraphics{../figures/gi-lambda.pdf}
 
 }
 
@@ -3114,7 +3246,7 @@ treatments are described in the Materials and Methods section.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/gmax-lambda.pdf}}
+\includegraphics{../figures/gmax-lambda.pdf}
 
 }
 
@@ -3244,7 +3376,7 @@ nonlinear fit.
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/null-sim-fgmax-tau.pdf}}
+\includegraphics{../figures/null-sim-fgmax-tau.pdf}
 
 }
 
@@ -3277,7 +3409,7 @@ the sensitivity parameter \(\rho\) examined below.
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/mediation-dag.pdf}}
+\includegraphics{../figures/mediation-dag.pdf}
 
 }
 
@@ -3336,7 +3468,7 @@ confounders.
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{../figures/mediation-sensitivity.pdf}}
+\includegraphics{../figures/mediation-sensitivity.pdf}
 
 }
 
@@ -3347,7 +3479,6 @@ interval); the vertical solid line is the breakdown point \(\rho^*\) at
 which the indirect effect is zero.}
 
 \end{figure}%
-
 
 
 
