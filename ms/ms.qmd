@@ -745,67 +745,6 @@ The direct effect of leaf type on $\tau$ indicates that adaxial stomata close fa
 
 Future research is needed to determine how stomatal kinetic responses measured in controlled conditions impact performance in nature. Our experimental protocol induced stomatal closure by abruptly switching incoming air to near-zero humidity, a perturbation far more severe than the gradual or partial VPD fluctuations leaves experience in the field. This approach is well suited for estimating the maximum rate of stomatal closure and comparing it among individuals and treatments, but it need not follow that the same anatomical and physiological factors that govern $\tau$ in our experiment also govern kinetic variation under more naturalistic conditions, where closure VPD may fluctuate more gradually. Future studies should also control the VPD stimulus throughout the entire response curve, rather than allowing it to vary as transpiration itself alters chamber humidity, as it did here ([@tbl-vpd]).  It will also be important to consider whether the substomatal airspace remains saturated during the humidity step, because \gsw{} will be underestimated if the airspace is subsaturated [@cernusak_unsaturation_2018; @buckley_humidity_2019; @wong_humidity_2022; @rockwell_extreme_2022]. We hypothesize that ecological conditions which favor close tracking of fluctuating environments will select for leaves with traits like smaller guard cell size and low \gi{} that enable rapid kinetics.
 
-
-<!-- THINGS I WOULD STILL LIKE TO ADD
-
-(not sure where this goes) It might seem that natural selection should favor faster stomatal responses to get closer to the ideal of instantaneous optimization. Under this assumption, variation in stomatal kinetics would depend on how strong directional selection for faster responses is counterbalanced by costs of faster stomata. We discuss multiple, nonmutually exclusive costs below [WHERE?]. However, once models account for inevitable lag times, natural selection can favor slower responses when this prevents overreacting to unpredictable and shortlived changes in the environment. [Review some lit] It is therefore likely that the direction of selection on stomatal response rate varies depending on the predictability and duration of environmental fluctuations, as well as the energetic costs of stomatal movements.
-
-Traditional view is that smaller stomata are selected for speed and because there is higher gmax for same fs (Franks). Our results suggest an alternative hypothesis. Smaller stomata may increase rate of stomatal closure (we haven't tested opening), but only if fgmax is low or moderate. Therefore if leaves with smaller stomata maintain a similar gop, then stomatal density must increase to prevent fgmax from increasing. This may explain the association between the association between small stomata and high density, and relatedly the dearth of leaves with sparse, small stomata.
-
-Might be useful to relate to literature on clines in stomatal size, especially poplar @klein_climate_2025 and @dittberner_natural_2018 and @zavala-paez_climate_2026
-
-note about adaxial stomata: Mott (2007) reported that stomatal responses to humidity were independent on the two surfaces of amphistomatous leaves of Vicia faba and Xanthium strumarium: when humidity was changed at one surface only, stomata on that surface responded but stomata on the other surface did not." (quote from Buckley et al 2011). FYI, tomatoes have BSEs (heterobaric)
-
-another recent paper on gop:gmax using Franks et al 2012 concept:
-https://doi.org/10.1093/aob/mcaf224
-
--->
-
-
-<!-- NOTES 
-
-# notes
-
-Kirschbaum et al. 1988 - read
-
-Tulva et al. (2025) - not super relevant for this paper.
-
-Hsu et al. (2021) - t50 WT aribodopsis: 5.1 ± 0.4 min. Their VPD method "followed by ∼2.0 kPa VPD (20 to 32% relative air humidity) in most experiments, as indicated in the figures". There was a lot in this paper. Basically, they don't know exactly how VPD is sensed, but show that it's independent of CO2 mechanism.
-
-Some older references: 
-
-(this measured steady state responses, not kinetics) Morison J.I.L. Gifford R.M. 1983. Stomatal sensitivity to carbon dioxide and humidity. A comparison of two C3 and C4 grass species. Plant Physiol. 71:789–796.
-
-(not really relevant) Talbott L.D. Rahveh E. Zeiger E. 2003. Relative humidity is a key factor in the acclimation of the stomatal response to CO2. J. Exp. Bot. 54:2141–2147.
-
-hall_leaf_1976 - shows that gsw responds to VPD per se at constant LWP
-
-Bunce (1997) - not very relevant
-
-Blatt et al. (2026) - not sure if this is useful. Shows that guard cell walls stay hydrated even when airspace is subsaturated.
-
-Buckley 2016 (10.1111/pce.12651) provides useful background on why hydroactive response takes time (ABA synthesis). 
-
-Merilo et al. (2018) say "The ABA signaling unit consists of cytosolic PYRABACTIN RESISTANCE1 (PYR1)/PYR1-LIKE (PYL)/ REGULATORY COMPONENTS OF ABA RECEPTORS (RCAR) receptors that, in the presence of ABA sequester type 2 protein phosphatases, lead to the activation of protein kinase OST1, which, in turn, activates the slow-type anion channel SLAC1 and triggers stomatal closure (Geiger et al., 2009; Lee et al., 2009; Ma et al., 2009; Park et al., 2009)" (these are steps after ABA synthesis)
-
-
-Ivanoff 1928 - original wrong-way response citation? from Jalakas et al 2021 ("promoting a transient passive ‘wrong-way’ stomatal opening (Ivanoff, 1928; Mott & Franks, 2001; Buckley, 2019).")
-
-
-FYI, t50 = "6.1 ± 0.32 min in Arabidopsis Col-0 wild-type (Merilo et al., 2018)"
-I also have read this: https://nph-onlinelibrary-wiley-com.ezproxy.library.wisc.edu/doi/full/10.1111/nph.17592
-
-Need to check out these references "Although the plant hormone abscisic acid (ABA) is involved in stomatal closure in response to drought stress and reduced air humidity (Bunce, 1997; Roelfsema & Hedrich, 2005; Bauer et al., 2013), the existence of an ABA-independent pathway participating in low humidity-induced stomatal response has been suggested (Xie et al., 2006). Furthermore, stomata may also directly respond to leaf water status without relying on ABA production and signalling (see Buckley, 2005; Damour et al., 2010; Peak & Mott, 2011). However, both the metabolically mediated hydro-active feedback response of guard cell osmotic pressure to the water status of epidermal evaporative site (Buckley, 2005) and the stomatal response mechanism based on a near-equilibrium in water potential between the guard cells and the air in the stomatal pore (Peak & Mott, 2011) still embed the potential for ABA to be involved in air humidity-related stomatal behaviour."
-
-Binstock et al. (2024) 10.1093/plphys/kiad560 - see if they have estimates of tau
-
-This paper looked at epidermal cell : guard cell size in domesticated tomato and related to closure kinetics. See if I can do this? 10.1111/ppl.70543 (use Sack and Buckley estimate of epidermal cell size based on stomatal index, density, and guard cell size)
-
-NOT THAT USEFUL - Tinoco-Ojanguren C, Pearcy RW. (1993) Stomatal dynamics and its importance to carbon gain in 2 rain forest Piper species. 1. VPD effects on the transient stomatal response to light flecks. Oecologia 94: 388–394
-
-Some OG citations "Changes in stomatal aperture are driven by changes in turgor pressure of guard cells (Heath 1938) due to the accumulation of ions and/or solutes (Imamura 1943; Fujino 1967; Outlaw 1983), which increases the osmotic potential and lowers the water potential of guard cells (Weyers and Meidner 1990; Willmer and Fricker 1996)." quote from Lawson et al (2010)
--->
- 
 ## Acknowledgements
 
 Comments from two anonymous reviewers greatly improved the manuscript. Sam McKlin and Tom Buckley helped with protocol development. Justin Alter, Max Gatlin, Joana Kim, Jenna Matsuyama, Brandon Najarian, Dachuan Wang, and Kai Yasuda contributed to data collection. We used Copilot, ChatGPT, and Posit Assistant (Claude) to assist with coding and proofreading text.
@@ -832,6 +771,60 @@ All data and code are available on GitHub (\url{https://github.com/cdmuir/solanu
 
 ::: {#refs}
 :::
+
+{{< pagebreak >}}
+
+## Supporting Information legends
+
+**Table S1.** Accession information of *Solanum* populations used in this study.
+
+**Table S2.** Relative humidity and vapor pressure deficit during stomatal kinetics measurements.
+
+**Table S3.** Total number of humidity response curves analyzed by treatment combination.
+
+**Table S4.** Model comparison results for fixed effect of guard cell length and conductance components on kinetic parameters.
+
+**Table S5.** Pareto diagnostics for model selection and cross-validation.
+
+**Table S6.** Fixed effect parameter estimates from the selected Bayesian model.
+
+**Table S7.** Random effect parameter estimates from the selected Bayesian model.
+
+**Figure S1.** Pairwise relationships among vapor pressure deficit (VPD) covariates during the fitted interval.
+
+**Figure S2.** Strong correlation between stomatal closure time constant $\tau$ and the inverse VPD saturation rate.
+
+**Figure S3.** Vapor pressure deficit saturation rate is driven by sample airstream dynamics.
+
+**Figure S4.** Effects of $g_\mathrm{i}$ on $\tau$ and phylogenetic correlation between guard cell length and $\tau$ are robust to final VPD.
+
+**Figure S5.** Estimated and observed maximum stomatal conductances are nearly identical.
+
+**Figure S6.** Adaxial stomata are consistently larger than abaxial stomata.
+
+**Figure S7.** Individual-level effects across plausible models are broadly consistent.
+
+**Figure S8.** Phylogenetic correlations across plausible models are broadly consistent.
+
+**Figure S9.** Posterior estimates of phylogenetic correlations and fixed effects of guard cell length on $\tau$ are collinear.
+
+**Figure S10.** Individual-level variation in maximum conductance does not influence time constant $\tau$.
+
+**Figure S11.** Individual-level variation in initial conductance influences lag time $\lambda$.
+
+**Figure S12.** Individual-level variation in maximum conductance does not influence lag time $\lambda$.
+
+**Figure S13.** Curve-fitting procedure alone does not induce a $g_\mathrm{i}$–$\tau$ association (null simulation).
+
+**Figure S14.** Causal structure of the $g_\mathrm{i}$–$\tau$ path analysis and unmeasured confounding.
+
+**Figure S15.** Sensitivity of indirect treatment effects on $\tau$ through $g_\mathrm{i}$ to residual correlation assumptions.
+
+**Notes S1.** Effects of $g_\mathrm{i}$ and guard cell length are robust to variation in VPD stimulus.
+
+**Notes S2.** The $g_\mathrm{i}$–$\tau$ association is not an artifact of the curve-fitting procedure.
+
+**Notes S3.** Sensitivity analysis of the $g_\mathrm{i}$–$\tau$ path analysis to unmeasured confounding.
 
 {{< pagebreak >}}
 
@@ -1260,14 +1253,14 @@ fx1 |>
 **Table file:**  
 Download from: \url{https://github.com/cdmuir/solanum-kinetics/raw/refs/heads/main/tables/tbl-estimates-curve.csv}
 
-Raw data file in CSV format containing estimates of stomatal anatomy and kinetic variables associated with each curve. These are raw data for fitting multiresponse models. A final version will be deposited on Dryad after acceptance. This version is available for reviewers.
+Raw data file in CSV format containing estimates of stomatal anatomy and kinetic variables associated with each curve. These are raw data for fitting multiresponse models.
 :::
 
 ::: {#tbl-estimates-accession}
 **Table file:**  
 Download from: \url{https://github.com/cdmuir/solanum-kinetics/raw/refs/heads/main/tables/tbl-estimates-accession.csv}
 
-Raw data file in CSV format containing estimates of stomatal anatomy and kinetic variables associated with each population based on multiresponse model predictions. A final version will be deposited on Dryad after acceptance. This version is available for reviewers.
+Raw data file in CSV format containing estimates of stomatal anatomy and kinetic variables associated with each population based on multiresponse model predictions. 
 :::
 
 \clearpage
