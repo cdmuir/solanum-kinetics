@@ -43,6 +43,8 @@ header-includes: |
   \usepackage{placeins}
   % For multi-line table headers
   \usepackage{makecell}
+  % For landscape tables/pages
+  \usepackage{pdflscape}
 mainfont: Times New Roman
 bibliography: solanum-kinetics.bib
 csl: https://www.zotero.org/styles/new-phytologist
@@ -848,16 +850,21 @@ All data and code are available on GitHub (\url{https://github.com/cdmuir/solanu
 
 ## Supporting tables
 
+```{=latex}
+\begin{landscape}
+```
+
 ```{r, populations, eval=TRUE,echo=FALSE,message=FALSE,warning=FALSE}
 #| label: tbl-populations
-#| tbl-cap: "Accession information of *Solanum* populations used in this study. The species name, accession number, collection latitude, longitude, and elevation. TGRC: Tomato Genetics Resource Center; mas: meters above sea level."
+#| tbl-cap: "Accession information of *Solanum* populations used in this study. The species name, authority, accession number, collection latitude, longitude, and elevation. TGRC: Tomato Genetics Resource Center; mas: meters above sea level."
 
 accession_info |>
   filter(accession %in% joined_data$acc) |>
   arrange(species, accession) |>
-  mutate(Species = glue("{species} {authority}")) |>
+  # mutate(Species = glue("{species} {authority}")) |>
   select(
-    Species,
+    Species = species,
+    Authority = authority,
     `TGRC accession` = accession,
     `Latitude` = lat,
     `Longitude` = lon,
@@ -865,7 +872,7 @@ accession_info |>
   ) |>
   knitr::kable(
     format = "latex",
-    digits = c(rep(0, 2), 3, 3, 0),
+    digits = c(rep(0, 3), 3, 3, 0),
     booktabs = TRUE,
     longtable = TRUE,
     escape = FALSE
@@ -875,6 +882,10 @@ accession_info |>
   ) |>
   kableExtra::column_spec(1, width = "3.25cm", italic = TRUE) 
 
+```
+
+```{=latex}
+\end{landscape}
 ```
 
 ```{r, vpd, eval=TRUE}

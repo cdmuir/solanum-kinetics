@@ -1,4 +1,5 @@
 % Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
@@ -7,21 +8,22 @@
   letterpaper,
   DIV=11,
   numbers=noendperiod]{scrartcl}
-
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else  
-    % xetex/luatex font selection
+\ifPDFTeX\else
+  % xetex/luatex font selection
   \setmainfont[]{Times New Roman}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
@@ -30,22 +32,33 @@
   \usepackage[]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage{xcolor}
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -57,17 +70,21 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
+
+
 % definitions for citeproc citations
 \NewDocumentCommand\citeproctext{}{}
 \NewDocumentCommand\citeproc{mm}{%
@@ -101,6 +118,18 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -148,6 +177,8 @@
 \usepackage{placeins}
 % For multi-line table headers
 \usepackage{makecell}
+% For landscape tables/pages
+\usepackage{pdflscape}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -189,13 +220,13 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage{bookmark}
-
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
 \hypersetup{
   pdftitle={Guard cell size and initial conductance influence stomatal closure kinetics},
   pdfauthor={Christopher D. Muir\^{}\{1,2*\}; Wei Shen Lim\^{}\{1\}},
@@ -206,13 +237,14 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
+
 \title{Guard cell size and initial conductance influence stomatal
 closure kinetics}
 \author{Christopher D. Muir\(^{1,2*}\) \and Wei Shen Lim\(^{1}\)}
 \date{}
-
 \begin{document}
 \maketitle
+
 
 \begin{center}
 $^1$School of Life Sciences, University of Hawaiʻi; Mānoa, Hawaiʻi, USA\\
@@ -373,7 +405,7 @@ al.}, 2016). A four-parameter equation describes stomatal response
 kinetics to a step change in light intensity across dozens of plant
 species (Woning \emph{et al.}, 2026):
 
-\begin{equation}\phantomsection\label{eq-weibull}{
+\begin{equation}\protect\phantomsection\label{eq-weibull}{
   g_\mathrm{sw,t} = g_\mathrm{f} + (g_\mathrm{i} - g_\mathrm{f}) e^{-\left(\frac{t}{\tau}\right)^\lambda}.
 }\end{equation}
 
@@ -465,7 +497,7 @@ likely variation within and among species and growth forms in the
 
 \centering{
 
-\includegraphics{../figures/conceptual.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/conceptual.pdf}}
 
 }
 
@@ -1065,7 +1097,7 @@ on one surface was not affected by blocking gas exchange in the other
 
 \centering{
 
-\includegraphics{../figures/variance.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/variance.pdf}}
 
 }
 
@@ -1083,7 +1115,7 @@ populations was low for all traits.}
 
 \centering{
 
-\includegraphics{../figures/accession-anatomy.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/accession-anatomy.pdf}}
 
 }
 
@@ -1097,7 +1129,7 @@ populations was low for all traits.}
 
 \centering{
 
-\includegraphics{ms_files/figure-pdf/fig-accession-anatomy-cap-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{ms_files/figure-pdf/fig-accession-anatomy-cap-1.pdf}}
 
 }
 
@@ -1149,7 +1181,7 @@ to 1.39\%{]}.
 
 \centering{
 
-\includegraphics{../figures/accession-kinetics.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/accession-kinetics.pdf}}
 
 }
 
@@ -1230,7 +1262,7 @@ plausible causal effect of \gcl{} on \(\tau\) among populations.
 
 \centering{
 
-\includegraphics{../figures/gcl-tau.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/gcl-tau.pdf}}
 
 }
 
@@ -1253,7 +1285,7 @@ section.}
 
 \centering{
 
-\includegraphics{../figures/gi-tau.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/gi-tau.pdf}}
 
 }
 
@@ -1297,7 +1329,7 @@ so they do not simply sum on the percentage scale).
 
 \centering{
 
-\includegraphics{../figures/mediation.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/mediation.pdf}}
 
 }
 
@@ -1562,7 +1594,7 @@ on Zenodo (\url{https://doi.org/10.5281/zenodo.22802259}).
 
 \singlespacing
 
-\phantomsection\label{refs}
+\protect\phantomsection\label{refs}
 \begin{CSLReferences}{0}{1}
 \bibitem[\citeproctext]{ref-aasamaa_stomatal_2011}
 \textbf{\textbf{Aasamaa K}, \textbf{Sõber A}}. \textbf{2011a}.
@@ -2355,64 +2387,68 @@ diverse tomato species across geographical habitats} (T Lawson, Ed.).
 
 \subsection{Supporting tables}\label{supporting-tables}
 
-\begin{longtable}{>{\raggedright\arraybackslash}p{3.25cm}lrrr}
+\begin{landscape}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{3.25cm}llrrr}
 
 \caption{\label{tbl-populations}Accession information of \emph{Solanum}
-populations used in this study. The species name, accession number,
-collection latitude, longitude, and elevation. TGRC: Tomato Genetics
-Resource Center; mas: meters above sea level.}
+populations used in this study. The species name, authority, accession
+number, collection latitude, longitude, and elevation. TGRC: Tomato
+Genetics Resource Center; mas: meters above sea level.}
 
 \tabularnewline
 
 \toprule
-Species & TGRC accession & Latitude & Longitude & Elevation (mas)\\
+Species & Authority & TGRC accession & Latitude & Longitude & Elevation (mas)\\
 \midrule
 \endfirsthead
-\multicolumn{5}{@{}l}{\textit{(continued)}}\\
+\multicolumn{6}{@{}l}{\textit{(continued)}}\\
 \toprule
-Species & TGRC accession & Latitude & Longitude & Elevation (mas)\\
+Species & Authority & TGRC accession & Latitude & Longitude & Elevation (mas)\\
 \midrule
 \endhead
 
 \endfoot
 \bottomrule
 \endlastfoot
-\em{\cellcolor{gray!10}{S. arcanum Peralta}} & \cellcolor{gray!10}{LA2172} & \cellcolor{gray!10}{-6.008} & \cellcolor{gray!10}{-78.858} & \cellcolor{gray!10}{662}\\
-\em{S. cheesmaniae (L. Riley) Fosberg} & LA0429 & -0.644 & -90.329 & 800\\
-\em{\cellcolor{gray!10}{S. cheesmaniae (L. Riley) Fosberg}} & \cellcolor{gray!10}{LA3124} & \cellcolor{gray!10}{-0.804} & \cellcolor{gray!10}{-90.042} & \cellcolor{gray!10}{1}\\
-\em{S. chilense (Dunal) Reiche} & LA1782 & -15.267 & -74.633 & 1000\\
-\em{\cellcolor{gray!10}{S. chilense (Dunal) Reiche}} & \cellcolor{gray!10}{LA4117A} & \cellcolor{gray!10}{-22.907} & \cellcolor{gray!10}{-67.941} & \cellcolor{gray!10}{3540}\\
+\em{\cellcolor{gray!10}{S. arcanum}} & \cellcolor{gray!10}{Peralta} & \cellcolor{gray!10}{LA2172} & \cellcolor{gray!10}{-6.008} & \cellcolor{gray!10}{-78.858} & \cellcolor{gray!10}{662}\\
+\em{S. cheesmaniae} & (L. Riley) Fosberg & LA0429 & -0.644 & -90.329 & 800\\
+\em{\cellcolor{gray!10}{S. cheesmaniae}} & \cellcolor{gray!10}{(L. Riley) Fosberg} & \cellcolor{gray!10}{LA3124} & \cellcolor{gray!10}{-0.804} & \cellcolor{gray!10}{-90.042} & \cellcolor{gray!10}{1}\\
+\em{S. chilense} & (Dunal) Reiche & LA1782 & -15.267 & -74.633 & 1000\\
+\em{\cellcolor{gray!10}{S. chilense}} & \cellcolor{gray!10}{(Dunal) Reiche} & \cellcolor{gray!10}{LA4117A} & \cellcolor{gray!10}{-22.907} & \cellcolor{gray!10}{-67.941} & \cellcolor{gray!10}{3540}\\
 \addlinespace
-\em{S. chmielewskii (C. M. Rick et al.) D. M. Spooner et al.} & LA1028 & -13.883 & -73.017 & 3000\\
-\em{\cellcolor{gray!10}{S. chmielewskii (C. M. Rick et al.) D. M. Spooner et al.}} & \cellcolor{gray!10}{LA1316} & \cellcolor{gray!10}{-13.400} & \cellcolor{gray!10}{-73.906} & \cellcolor{gray!10}{2920}\\
-\em{S. corneliomulleri J. F. Macbr.} & LA0107 & -13.117 & -76.383 & 60\\
-\em{\cellcolor{gray!10}{S. corneliomulleri J. F. Macbr.}} & \cellcolor{gray!10}{LA0444} & \cellcolor{gray!10}{-13.433} & \cellcolor{gray!10}{-76.133} & \cellcolor{gray!10}{100}\\
-\em{S. galapagense S. C. Darwin \& Peralta} & LA0436 & -0.953 & -90.978 & 40\\
+\em{S. chmielewskii} & (C. M. Rick et al.) D. M. Spooner et al. & LA1028 & -13.883 & -73.017 & 3000\\
+\em{\cellcolor{gray!10}{S. chmielewskii}} & \cellcolor{gray!10}{(C. M. Rick et al.) D. M. Spooner et al.} & \cellcolor{gray!10}{LA1316} & \cellcolor{gray!10}{-13.400} & \cellcolor{gray!10}{-73.906} & \cellcolor{gray!10}{2920}\\
+\em{S. corneliomulleri} & J. F. Macbr. & LA0107 & -13.117 & -76.383 & 60\\
+\em{\cellcolor{gray!10}{S. corneliomulleri}} & \cellcolor{gray!10}{J. F. Macbr.} & \cellcolor{gray!10}{LA0444} & \cellcolor{gray!10}{-13.433} & \cellcolor{gray!10}{-76.133} & \cellcolor{gray!10}{100}\\
+\em{S. galapagense} & S. C. Darwin \& Peralta & LA0436 & -0.953 & -90.978 & 40\\
 \addlinespace
-\em{\cellcolor{gray!10}{S. galapagense S. C. Darwin \& Peralta}} & \cellcolor{gray!10}{LA1044} & \cellcolor{gray!10}{-0.284} & \cellcolor{gray!10}{-90.548} & \cellcolor{gray!10}{0}\\
-\em{S. habrochaites S. Knapp \& D. M. Spooner} & LA0407 & -2.181 & -79.884 & 70\\
-\em{\cellcolor{gray!10}{S. habrochaites S. Knapp \& D. M. Spooner}} & \cellcolor{gray!10}{LA1777} & \cellcolor{gray!10}{-9.550} & \cellcolor{gray!10}{-77.700} & \cellcolor{gray!10}{3216}\\
-\em{S. huaylasense Peralta} & LA1358 & -9.533 & -77.967 & 750\\
-\em{\cellcolor{gray!10}{S. huaylasense Peralta}} & \cellcolor{gray!10}{LA1360} & \cellcolor{gray!10}{-9.546} & \cellcolor{gray!10}{-77.929} & \cellcolor{gray!10}{1490}\\
+\em{\cellcolor{gray!10}{S. galapagense}} & \cellcolor{gray!10}{S. C. Darwin \& Peralta} & \cellcolor{gray!10}{LA1044} & \cellcolor{gray!10}{-0.284} & \cellcolor{gray!10}{-90.548} & \cellcolor{gray!10}{0}\\
+\em{S. habrochaites} & S. Knapp \& D. M. Spooner & LA0407 & -2.181 & -79.884 & 70\\
+\em{\cellcolor{gray!10}{S. habrochaites}} & \cellcolor{gray!10}{S. Knapp \& D. M. Spooner} & \cellcolor{gray!10}{LA1777} & \cellcolor{gray!10}{-9.550} & \cellcolor{gray!10}{-77.700} & \cellcolor{gray!10}{3216}\\
+\em{S. huaylasense} & Peralta & LA1358 & -9.533 & -77.967 & 750\\
+\em{\cellcolor{gray!10}{S. huaylasense}} & \cellcolor{gray!10}{Peralta} & \cellcolor{gray!10}{LA1360} & \cellcolor{gray!10}{-9.546} & \cellcolor{gray!10}{-77.929} & \cellcolor{gray!10}{1490}\\
 \addlinespace
-\em{S. huaylasense Peralta} & LA1364 & -10.133 & -77.383 & 2920\\
-\em{\cellcolor{gray!10}{S. lycopersicoides Dunal}} & \cellcolor{gray!10}{LA2951} & \cellcolor{gray!10}{-19.317} & \cellcolor{gray!10}{-69.450} & \cellcolor{gray!10}{2200}\\
-\em{S. lycopersicoides Dunal} & LA4126 & -19.287 & -69.396 & 3120\\
-\em{\cellcolor{gray!10}{S. neorickii D. M. Spooner et al.}} & \cellcolor{gray!10}{LA1322} & \cellcolor{gray!10}{-13.483} & \cellcolor{gray!10}{-72.442} & \cellcolor{gray!10}{2380}\\
-\em{S. neorickii D. M. Spooner et al.} & LA2133 & -3.400 & -79.183 & 1980\\
+\em{S. huaylasense} & Peralta & LA1364 & -10.133 & -77.383 & 2920\\
+\em{\cellcolor{gray!10}{S. lycopersicoides}} & \cellcolor{gray!10}{Dunal} & \cellcolor{gray!10}{LA2951} & \cellcolor{gray!10}{-19.317} & \cellcolor{gray!10}{-69.450} & \cellcolor{gray!10}{2200}\\
+\em{S. lycopersicoides} & Dunal & LA4126 & -19.287 & -69.396 & 3120\\
+\em{\cellcolor{gray!10}{S. neorickii}} & \cellcolor{gray!10}{D. M. Spooner et al.} & \cellcolor{gray!10}{LA1322} & \cellcolor{gray!10}{-13.483} & \cellcolor{gray!10}{-72.442} & \cellcolor{gray!10}{2380}\\
+\em{S. neorickii} & D. M. Spooner et al. & LA2133 & -3.400 & -79.183 & 1980\\
 \addlinespace
-\em{\cellcolor{gray!10}{S. pennellii Correll}} & \cellcolor{gray!10}{LA0716} & \cellcolor{gray!10}{-16.225} & \cellcolor{gray!10}{-73.617} & \cellcolor{gray!10}{50}\\
-\em{S. pennellii Correll} & LA0750 & -14.775 & -75.034 & 550\\
-\em{\cellcolor{gray!10}{S. pennellii Correll}} & \cellcolor{gray!10}{LA3778} & \cellcolor{gray!10}{-14.775} & \cellcolor{gray!10}{-75.034} & \cellcolor{gray!10}{616}\\
-\em{S. peruvianum L.} & LA2744 & -18.550 & -70.150 & 400\\
-\em{\cellcolor{gray!10}{S. peruvianum L.}} & \cellcolor{gray!10}{LA2964} & \cellcolor{gray!10}{-18.028} & \cellcolor{gray!10}{-70.835} & \cellcolor{gray!10}{75}\\
+\em{\cellcolor{gray!10}{S. pennellii}} & \cellcolor{gray!10}{Correll} & \cellcolor{gray!10}{LA0716} & \cellcolor{gray!10}{-16.225} & \cellcolor{gray!10}{-73.617} & \cellcolor{gray!10}{50}\\
+\em{S. pennellii} & Correll & LA0750 & -14.775 & -75.034 & 550\\
+\em{\cellcolor{gray!10}{S. pennellii}} & \cellcolor{gray!10}{Correll} & \cellcolor{gray!10}{LA3778} & \cellcolor{gray!10}{-14.775} & \cellcolor{gray!10}{-75.034} & \cellcolor{gray!10}{616}\\
+\em{S. peruvianum} & L. & LA2744 & -18.550 & -70.150 & 400\\
+\em{\cellcolor{gray!10}{S. peruvianum}} & \cellcolor{gray!10}{L.} & \cellcolor{gray!10}{LA2964} & \cellcolor{gray!10}{-18.028} & \cellcolor{gray!10}{-70.835} & \cellcolor{gray!10}{75}\\
 \addlinespace
-\em{S. pimpinellifolium L.} & LA1269 & -11.483 & -77.075 & 400\\
-\em{\cellcolor{gray!10}{S. pimpinellifolium L.}} & \cellcolor{gray!10}{LA1589} & \cellcolor{gray!10}{-8.433} & \cellcolor{gray!10}{-78.817} & \cellcolor{gray!10}{30}\\
-\em{S. pimpinellifolium L.} & LA2933 & -1.442 & -80.562 & 375\\
-\em{\cellcolor{gray!10}{S. sitiens I. M. Johnst.}} & \cellcolor{gray!10}{LA4116} & \cellcolor{gray!10}{-22.159} & \cellcolor{gray!10}{-68.782} & \cellcolor{gray!10}{2960}\\*
+\em{S. pimpinellifolium} & L. & LA1269 & -11.483 & -77.075 & 400\\
+\em{\cellcolor{gray!10}{S. pimpinellifolium}} & \cellcolor{gray!10}{L.} & \cellcolor{gray!10}{LA1589} & \cellcolor{gray!10}{-8.433} & \cellcolor{gray!10}{-78.817} & \cellcolor{gray!10}{30}\\
+\em{S. pimpinellifolium} & L. & LA2933 & -1.442 & -80.562 & 375\\
+\em{\cellcolor{gray!10}{S. sitiens}} & \cellcolor{gray!10}{I. M. Johnst.} & \cellcolor{gray!10}{LA4116} & \cellcolor{gray!10}{-22.159} & \cellcolor{gray!10}{-68.782} & \cellcolor{gray!10}{2960}\\*
 
 \end{longtable}
+
+\end{landscape}
 
 \begin{table}[h]
 
@@ -2862,7 +2898,7 @@ traits.}
 
 \centering{
 
-\includegraphics{../figures/vpd-pairs.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/vpd-pairs.pdf}}
 
 }
 
@@ -2881,7 +2917,7 @@ Notes S1).}
 
 \centering{
 
-\includegraphics{../figures/tau-vpd-rate.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/tau-vpd-rate.pdf}}
 
 }
 
@@ -2898,7 +2934,7 @@ line us ordinary least-squares regression fit.}
 
 \centering{
 
-\includegraphics{../figures/vpd-h2o-rate.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/vpd-h2o-rate.pdf}}
 
 }
 
@@ -2916,7 +2952,7 @@ constants come from the same saturating-exponential model used for VPD.}
 
 \centering{
 
-\includegraphics{../figures/vpd-comparison.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/vpd-comparison.pdf}}
 
 }
 
@@ -2933,7 +2969,7 @@ covariate of \(\tau\) and \(\lambda\) (pink; see Notes S1).}
 
 \centering{
 
-\includegraphics{../figures/compare-gsw.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/compare-gsw.pdf}}
 
 }
 
@@ -2969,7 +3005,7 @@ curve.}
 
 \centering{
 
-\includegraphics{../figures/gcl.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/gcl.pdf}}
 
 }
 
@@ -2986,7 +3022,7 @@ larger values on the adaxial surface.}
 
 \centering{
 
-\includegraphics{../figures/estimates-b.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/estimates-b.pdf}}
 
 }
 
@@ -3004,7 +3040,7 @@ overlap zero.}
 
 \centering{
 
-\includegraphics{../figures/estimates-phy.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/estimates-phy.pdf}}
 
 }
 
@@ -3022,7 +3058,7 @@ intervals that overlap zero.}
 
 \centering{
 
-\includegraphics{../figures/collinear.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/collinear.pdf}}
 
 }
 
@@ -3041,7 +3077,7 @@ parameter.}
 
 \centering{
 
-\includegraphics{../figures/gmax-tau.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/gmax-tau.pdf}}
 
 }
 
@@ -3059,7 +3095,7 @@ treatments are described in the Materials and Methods section.}
 
 \centering{
 
-\includegraphics{../figures/gi-lambda.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/gi-lambda.pdf}}
 
 }
 
@@ -3078,7 +3114,7 @@ treatments are described in the Materials and Methods section.}
 
 \centering{
 
-\includegraphics{../figures/gmax-lambda.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/gmax-lambda.pdf}}
 
 }
 
@@ -3208,7 +3244,7 @@ nonlinear fit.
 
 \centering{
 
-\includegraphics{../figures/null-sim-fgmax-tau.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/null-sim-fgmax-tau.pdf}}
 
 }
 
@@ -3241,7 +3277,7 @@ the sensitivity parameter \(\rho\) examined below.
 
 \centering{
 
-\includegraphics{../figures/mediation-dag.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/mediation-dag.pdf}}
 
 }
 
@@ -3300,7 +3336,7 @@ confounders.
 
 \centering{
 
-\includegraphics{../figures/mediation-sensitivity.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{../figures/mediation-sensitivity.pdf}}
 
 }
 
@@ -3311,6 +3347,7 @@ interval); the vertical solid line is the breakdown point \(\rho^*\) at
 which the indirect effect is zero.}
 
 \end{figure}%
+
 
 
 
