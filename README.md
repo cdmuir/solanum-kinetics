@@ -23,7 +23,7 @@ Muir CD, WS Lim. Guard cell size and initial conductance influence stomatal clos
 This repository has the following file folders:
 
 - `data`: data files downloaded from [cdmuir/solanum-aa](https://github.com/cdmuir/solanum-aa)
-- `figures`: figures generated from _R_ code
+- `figures`: figures generated from _R_ code, including `rh-curves-legend.tex`/`.pdf` — a standalone LaTeX-typeset legend page that `r/07_plot-curves.R` prepends to `rh-curves.pdf` (Supporting Information Figure S6)
 - `ms`: manuscript input (e.g. `ms.qmd` and `solanum-kinetics.bib`) and output (`ms.pdf`) files
 - `objects`: saved _R_ objects generated from _R_ code
 - `r`: _R_ scripts for all data processing and analysis
@@ -35,7 +35,7 @@ To run code and render the manuscript:
 
 - [_R_](https://cran.r-project.org/) version ≥ 4.5.0 and [_RStudio_](https://www.posit.co/) (recommended)
 - [Quarto](https://quarto.org/): for rendering `ms/ms.qmd`
-- [LaTeX](https://www.latex-project.org/): install the full version or use [**tinytex**](https://yihui.org/tinytex/)
+- [LaTeX](https://www.latex-project.org/): install the full version or use [**tinytex**](https://yihui.org/tinytex/) — also required by `r/07_plot-curves.R`, which compiles `figures/rh-curves-legend.tex` (the explanatory legend page prepended to Supporting Information Figure S6) with `tinytex::pdflatex()` and merges it with the curve panels using the **qpdf** _R_ package
 - [GNU Make](https://www.gnu.org/software/make/): type `make --version` in a terminal to check if it is already installed
 
 Before running scripts, install the required _R_ packages:

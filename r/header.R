@@ -26,6 +26,7 @@ suppressPackageStartupMessages({
   library(posterior)
   library(progress)
   library(purrr)
+  library(qpdf)
   library(readr)
   library(scales)
   library(stringr)
@@ -33,6 +34,7 @@ suppressPackageStartupMessages({
   library(tidybayes)
   library(tidyr)
   library(tikzDevice)
+  library(tinytex)
   library(zip)
 })
 

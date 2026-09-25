@@ -89,7 +89,36 @@ rh_curves = list.files(sk_dir1) |>
     
   }, .progress = TRUE)
 
-pdf("figures/rh-curves.pdf", width = fig_width, height = fig_height)
+# --- Explanatory legend page (Figure S6) --------------------------------
+legend_tex_path = "figures/rh-curves-legend.tex"
+legend_pdf_path = "figures/rh-curves-legend.pdf"
+panels_pdf_path = tempfile(fileext = ".pdf")
+
+legend_tex = glue(
+  .trim = FALSE,
+  "\\documentclass[11pt]{{article}}\n",
+  "\\usepackage[paperwidth={fig_width}in,paperheight={fig_height}in,margin=0.45in]{{geometry}}\n",
+  "\\usepackage{{mathptmx}}\n",
+  "\\usepackage{{parskip}}\n",
+  "\\pagestyle{{empty}}\n",
+  "\\newcommand{{\\gsw}}{{$g_\\mathrm{{sw}}$}}\n",
+  "\\begin{{document}}\n",
+  "\\noindent New Phytologist Supporting Information\\\\\n",
+  "Article title: Guard cell size and initial conductance influence stomatal closure kinetics\\\\\n",
+  "Authors: Christopher D. Muir, Wei Shen Lim\\\\\n",
+  "Article acceptance date: 18 September 2026\n\n",
+  "\\noindent\\textbf{{\\large Figure S6. Humidity-response curves and fitted lines.}}\n\n",
+  "\\noindent The title of each panel provides the Tomato Genetics Resource Center (TGRC) accession number, replicate letter, and species name.\n\n",
+  "\\noindent The subtitle indicates the growth light intensity (sun or shade), measurement light intensity (low or high), and leaf type (amphi or pseudohypo).\n\n",
+  "\\noindent Points are raw stomatal conductance (\\gsw) measurements and grey lines are the fitted Weibull curve (Eq.~1 of the main text) for that response.\n\n",
+  "\\noindent The Bayesian coefficient of determination (Bayes $R^2$) for the fitted model is shown to the right of each panel.\n",
+  "\\end{{document}}\n"
+)
+writeLines(legend_tex, legend_tex_path)
+pdflatex(legend_tex_path, pdf_file = legend_pdf_path, clean = TRUE)
+
+pdf(panels_pdf_path, width = fig_width, height = fig_height)
+
 pb <- progress_bar$new(
   total = length(rh_curves),
   format = "  plotting curves [:bar] :percent eta: :eta",
@@ -103,3 +132,9 @@ for (i in seq_along(rh_curves)) {
 }
 
 dev.off()
+
+pdf_combine(
+  input = c(legend_pdf_path, panels_pdf_path),
+  output = "figures/rh-curves.pdf"
+)
+file.remove(panels_pdf_path)

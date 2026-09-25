@@ -6,11 +6,18 @@
 #                 scripts' outputs (objects/weibull/, objects/fits/,
 #                 objects/r2.rds, objects/pars-summary.rds,
 #                 figures/compare-gsw.pdf, figures/rh-curves.pdf,
+#                 figures/rh-curves-legend.tex, figures/rh-curves-legend.pdf,
 #                 objects/selected_model_vpd.rds, and
 #                 objects/null-sim-fgmax-tau.rds) to already exist
 #                 from a prior `make all`
 #   make all   -- run every R script (r/00_ through r/38_) including the
 #                 slow ones, then render (slow)
+#
+# r/07_plot-curves.R also requires a working LaTeX installation (see the
+# README's Prerequisites) and the qpdf R package: it compiles
+# figures/rh-curves-legend.tex with tinytex::pdflatex() into an explanatory
+# legend page for Supporting Information Figure S6, then merges it with the
+# per-curve panels into figures/rh-curves.pdf using qpdf::pdf_combine().
 #
 # This reflects the public repo layout: r/00_ through r/38_ (the archived
 # scripts under r/archive/ -- including the former r/27_plot-conceptual-BD.R,
@@ -101,6 +108,9 @@ $(STAMPS)/06_compare-gsw: r/06_compare-gsw.R r/header.R r/functions.R \
 # real timestamp, so if they were regular prerequisites this target would
 # be considered out of date -- and thus rebuilt -- on every single `make
 # fast` invocation, not just the first.
+# Also compiles figures/rh-curves-legend.tex (via tinytex::pdflatex()) and
+# merges it into figures/rh-curves.pdf with qpdf::pdf_combine(); see the
+# NOTE at the top of this file.
 $(STAMPS)/07_plot-curves: r/07_plot-curves.R r/header.R r/functions.R \
   $(STAMPS)/00_load-data | $(STAMPS)/03_refit-weibull $(STAMPS)/04_calc-r2 $(STAMPS)
 	@echo "==> r/07_plot-curves.R"
