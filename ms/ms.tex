@@ -218,7 +218,7 @@ closure kinetics}
 
 \begin{center}
 $^1$School of Life Sciences, University of Hawaiʻi; Mānoa, Hawaiʻi, USA\\
-$^2$Department of Botany, University of Wisconsin, Madison; Wisconsin, USA\\
+$^2$Department of Biology, University of Wisconsin, Madison; Wisconsin, USA\\
 \medskip
 *Corresponding author: cdmuir@wisc.edu\\
 \medskip
@@ -228,7 +228,9 @@ ORCID: Wei Shen Lim — \href{https://orcid.org/0009-0001-1406-7957}{0009-0001-1
 Keywords: guard cell size, leaf gas exchange, phylogenetic heritability, \textit{Solanum}, stomatal kinetics, vapor pressure deficit
 \end{center}
 
+\begin{flushleft}
 Running head: Guard cell size, initial conductance, and stomatal kinetics
+\end{flushleft}
 
 % \linenumbers
 % \onehalfspacing
@@ -766,9 +768,8 @@ that the estimated \gi{} was a good proxy for stomatal conductance at
 the time of the step change in humidity. Because \gi{} is estimated from
 the same nonlinear fit as \(\tau\) and \(\lambda\), we used a null
 simulation to confirm that this does not, by itself, induce a spurious
-\fgmax{}-\(\tau\) association (Notes S2;
-Figure~\ref{fig-null-sim-fgmax-tau}). We used the anatomical \gmax{} for
-the surface(s) measured in each curve to calculate \fgmax. For amphi
+\fgmax{}-\(\tau\) association (Notes S2). We used the anatomical \gmax{}
+for the surface(s) measured in each curve to calculate \fgmax. For amphi
 curves, we used the sum of adaxial and abaxial \gmax{}; for pseudohypo
 curves, we used only the abaxial \gmax{}. Although \gmax{} calculated
 this way is a theoretical upper bound based on stomatal geometry rather
@@ -939,15 +940,14 @@ the same curve as \(\tau\), and could share unmeasured confounders
 (e.g., hydraulic status, measurement order, realized VPD trajectory)
 with \(\tau\), violating the sequential ignorability assumption required
 for a causal interpretation. We assessed the plausibility of this
-assumption directly with a sensitivity analysis (Notes S3;
-Figure~\ref{fig-mediation-dag}; Figure~\ref{fig-mediation-sensitivity}).
-We inferred the direct effect of treatments on \(\tau\) from model
-coefficients. We estimated the indirect effect of treatments as the
-product of the effect of treatment on \gi{} and the effect of that trait
-on \(\tau\) (Imai \emph{et al.}, 2010). We determined significant direct
-and indirect effects based on whether the 95\% confidence intervals of
-the effects were different than zero. We calculated effect sizes as the
-point estimate (median of the posterior) divided by the standard error
+assumption directly with a sensitivity analysis (Notes S3). We inferred
+the direct effect of treatments on \(\tau\) from model coefficients. We
+estimated the indirect effect of treatments as the product of the effect
+of treatment on \gi{} and the effect of that trait on \(\tau\) (Imai
+\emph{et al.}, 2010). We determined significant direct and indirect
+effects based on whether the 95\% confidence intervals of the effects
+were different than zero. We calculated effect sizes as the point
+estimate (median of the posterior) divided by the standard error
 (standard deviation of the posterior).
 
 \subsubsection{Variance decomposition and phylogenetic
@@ -2345,22 +2345,25 @@ diverse tomato species across geographical habitats} (T Lawson, Ed.).
 
 \end{CSLReferences}
 
+\newpage{}
+
 \subsection{ALT TEXT figures}\label{alt-text-figures}
 
 \textbf{Figure 1.} Four-panel conceptual diagram. Panel a: stomatal
 conductance over time after a step increase in vapor pressure deficit,
 showing a brief rise (wrong-way response) followed by a decline to a
-lower steady state (right-way response); a dashed curve shows a Weibull
+lower steady state (right-way response); an orange curve shows a Weibull
 function fit to the decline, with initial and final conductance values
-marked. Panel b: two decline curves showing how the lag-time parameter
-changes the response shape --- one a smooth, roughly exponential decline
-and one an S-shaped, accelerating decline. Panel c: side-by-side
-schematic cross-sections of a small and a large guard cell, illustrating
-that smaller cells have a greater surface-area-to-volume ratio. Panel d:
-a saturating curve of stomatal conductance versus guard cell turgor
-pressure, with tangent lines at two points showing the slope is steeper
-at low conductance (low fraction of maximum conductance) and shallower
-at high conductance (high fraction of maximum conductance).
+marked. Panel b: four decline curves showing how the time-constant and
+lag-time parameters change the response shape. The smooth, roughly
+exponential declines, have low lag time at different rates; the two
+S-shaped curves show accelerating decline at different rates after a
+lag. Panel c: Two curves showing faster closure kinetics in smaller
+guard cells with greater surface area surface-area-to-volume ratio.
+Panel d: a saturating curve of stomatal conductance versus guard cell
+turgor pressure, with tangent lines at two points showing the slope is
+steeper at low conductance (low fraction of maximum conductance) and
+shallower at high conductance (high fraction of maximum conductance).
 
 \textbf{Figure 2.} Horizontal stacked bar chart showing the percentage
 of variance apportioned among three hierarchical levels ---
@@ -2403,7 +2406,7 @@ axis) for individual leaves, arranged in a two-by-two grid of facets by
 growth light intensity (columns) and measurement light intensity (rows).
 Points are colored by leaf type (amphistomatous
 vs.~pseudohypostomatous), each with a fitted straight regression line
-and shaded confidence band showing a positive relationship between
+and shaded confidence ribbon showing a positive relationship between
 initial conductance and the time constant in every facet.
 
 \textbf{Figure 7.} Path diagram with three stacked panels, one for each
@@ -2491,15 +2494,6 @@ influences lag time \(\lambda\).
 \textbf{Figure S13.} Individual-level variation in the anatomical
 maximum conductance does not influence lag time \(\lambda\).
 
-\textbf{Figure S14.} Comparison of the observed
-\(g_\mathrm{i}\)--\(\tau\) correlation against a null distribution.
-
-\textbf{Figure S15.} Causal structure of the \(g_\mathrm{i}\)--\(\tau\)
-path analysis and unmeasured confounding.
-
-\textbf{Figure S16.} Sensitivity of indirect treatment effects on
-\(\tau\) through \(g_\mathrm{i}\) to residual correlation assumptions.
-
 \textbf{Notes S1.} Effects of \(g_\mathrm{i}\) and guard cell length are
 robust to variation in VPD stimulus.
 
@@ -2509,13 +2503,22 @@ artifact of the curve-fitting procedure.
 \textbf{Notes S3.} Sensitivity analysis of the
 \(g_\mathrm{i}\)--\(\tau\) path analysis to unmeasured confounding.
 
+\textbf{Figure A.} Comparison of the observed \(g_\mathrm{i}\)--\(\tau\)
+correlation against a null distribution.
+
+\textbf{Figure B.} Causal structure of the \(g_\mathrm{i}\)--\(\tau\)
+path analysis and unmeasured confounding.
+
+\textbf{Figure C.} Sensitivity of indirect treatment effects on \(\tau\)
+through \(g_\mathrm{i}\) to residual correlation assumptions.
+
 \end{flushleft}
 
 \newpage{}
 
-\section{Supporting Information}\label{supporting-information}
+\section{New Phytologist Supporting
+Information}\label{new-phytologist-supporting-information}
 
-\noindent New Phytologist Supporting Information\\
 Article title: Guard cell size and initial conductance influence stomatal closure kinetics\\
 Authors: Christopher D. Muir, Wei Shen Lim\\
 Article acceptance date: 18 September 2026
@@ -3336,6 +3339,12 @@ constant as stomatal close.
 is not an artifact of the curve-fitting
 procedure}{Notes S2: The -\textbackslash tau association is not an artifact of the curve-fitting procedure}}\label{notes-s2-the--tau-association-is-not-an-artifact-of-the-curve-fitting-procedure}
 
+% Figs. S14-S16 are cited only within the Supporting Notes (not the main
+% text), so they are renumbered as lettered figures (A, B, C) rather than
+% continuing the S-numbered sequence used for figures cited in the main text.
+\renewcommand{\thefigure}{\Alph{figure}}
+\setcounter{figure}{0}
+
 The initial conductance \gi{} used to calculate \fgmax{} is estimated
 from the same nonlinear fit (Equation~\ref{eq-weibull}) that also
 estimates \(\tau\) and \(\lambda\) for each curve. This raises the
@@ -3479,6 +3488,14 @@ interval); the vertical solid line is the breakdown point \(\rho^*\) at
 which the indirect effect is zero.}
 
 \end{figure}%
+
+\subsection{References}\label{references-1}
+
+\phantomsection\label{refs-si}
+
+Imai, K., Keele, L., \& Tingley, D. (2010). A general approach to causal
+mediation analysis. \emph{Psychological Methods}, 15(4), 309--334.
+https://doi.org/10.1037/a0020761
 
 
 

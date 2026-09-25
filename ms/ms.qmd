@@ -53,7 +53,7 @@ csl: https://www.zotero.org/styles/new-phytologist
 ```{=latex}
 \begin{center}
 $^1$School of Life Sciences, University of Hawaiʻi; Mānoa, Hawaiʻi, USA\\
-$^2$Department of Botany, University of Wisconsin, Madison; Wisconsin, USA\\
+$^2$Department of Biology, University of Wisconsin, Madison; Wisconsin, USA\\
 \medskip
 *Corresponding author: cdmuir@wisc.edu\\
 \medskip
@@ -63,7 +63,9 @@ ORCID: Wei Shen Lim — \href{https://orcid.org/0009-0001-1406-7957}{0009-0001-1
 Keywords: guard cell size, leaf gas exchange, phylogenetic heritability, \textit{Solanum}, stomatal kinetics, vapor pressure deficit
 \end{center}
 
+\begin{flushleft}
 Running head: Guard cell size, initial conductance, and stomatal kinetics
+\end{flushleft}
 
 % \linenumbers
 % \onehalfspacing
@@ -546,7 +548,7 @@ The biophysical and morphological constants $b$ and $m$ are:
 $$b = \frac{D_\mathrm{wv}}{v},~\mathrm{and}$$	
 $$m = \frac{\pi c ^ 2}{j^{0.5} (4 h j + \pi c)},$$
 
-where $D_\mathrm{wv}$ is the diffusion coefficient of water vapor in air and $v$ is by the kinematic viscosity of dry air. We assumed $D_\mathrm{wv} = \SI{2.49e-5}{\meter\squared\per\second}$ and $v = \SI{2.24e-2}{\raiseto{3}\meter\per\mol}$ [@monteith_principles_2013]. For kidney-shaped guard cells like those in wild tomatoes, $c = h = j = 0.5$. To estimate \fgmax, we divided the initial \gsw{} estimated from the parameter \gi{} in @eq-weibull from each humidity response curve by the anatomical \gmax{} for that leaf. The estimated \gi{} was very close to the maximum \gsw{} observed near the beginning of each curve (@fig-compare-gsw), suggesting that the estimated \gi{} was a good proxy for stomatal conductance at the time of the step change in humidity. Because \gi{} is estimated from the same nonlinear fit as $\tau$ and $\lambda$, we used a null simulation to confirm that this does not, by itself, induce a spurious \fgmax{}-$\tau$ association (Notes S2; @fig-null-sim-fgmax-tau). We used the anatomical \gmax{} for the surface(s) measured in each curve to calculate \fgmax. For amphi curves, we used the sum of adaxial and abaxial \gmax{}; for pseudohypo curves, we used only the abaxial \gmax{}. Although \gmax{} calculated this way is a theoretical upper bound based on stomatal geometry rather than a directly measured quantity, it corresponds well to empirically measured maximum \gsw{} in experimentally controlled *Arabidopsis* [@dow_integrated_2014].
+where $D_\mathrm{wv}$ is the diffusion coefficient of water vapor in air and $v$ is by the kinematic viscosity of dry air. We assumed $D_\mathrm{wv} = \SI{2.49e-5}{\meter\squared\per\second}$ and $v = \SI{2.24e-2}{\raiseto{3}\meter\per\mol}$ [@monteith_principles_2013]. For kidney-shaped guard cells like those in wild tomatoes, $c = h = j = 0.5$. To estimate \fgmax, we divided the initial \gsw{} estimated from the parameter \gi{} in @eq-weibull from each humidity response curve by the anatomical \gmax{} for that leaf. The estimated \gi{} was very close to the maximum \gsw{} observed near the beginning of each curve (@fig-compare-gsw), suggesting that the estimated \gi{} was a good proxy for stomatal conductance at the time of the step change in humidity. Because \gi{} is estimated from the same nonlinear fit as $\tau$ and $\lambda$, we used a null simulation to confirm that this does not, by itself, induce a spurious \fgmax{}-$\tau$ association (Notes S2). We used the anatomical \gmax{} for the surface(s) measured in each curve to calculate \fgmax. For amphi curves, we used the sum of adaxial and abaxial \gmax{}; for pseudohypo curves, we used only the abaxial \gmax{}. Although \gmax{} calculated this way is a theoretical upper bound based on stomatal geometry rather than a directly measured quantity, it corresponds well to empirically measured maximum \gsw{} in experimentally controlled *Arabidopsis* [@dow_integrated_2014].
 
 ### Estimating kinetic parameters
 
@@ -601,7 +603,7 @@ To infer whether individual-level variation in \gcl{} and \fgmax{} influence kin
 
 #### Path analysis to test for plastic effects
 
-We used path analysis [@pearl_causality_2022] to test whether treatment-associated plasticity in $\tau$ was statistically consistent with an indirect path through plasticity in stomatal traits, in response to measurement light intensity, growth light intensity, and curve-type treatments. We focused on \gi{} because it was the only individual-level trait significantly associated with $\tau$ in the selected model (see Results). We do not treat this as a randomized-treatment causal mediation analysis because \gi{} is not randomized, is estimated from the same curve as $\tau$, and could share unmeasured confounders (e.g., hydraulic status, measurement order, realized VPD trajectory) with $\tau$, violating the sequential ignorability assumption required for a causal interpretation. We assessed the plausibility of this assumption directly with a sensitivity analysis (Notes S3; @fig-mediation-dag; @fig-mediation-sensitivity). We inferred the direct effect of treatments on $\tau$ from model coefficients. We estimated the indirect effect of treatments as the product of the effect of treatment on \gi{} and the effect of that trait on $\tau$ [@imai_general_2010]. We determined significant direct and indirect effects based on whether the 95% confidence intervals of the effects were different than zero. We calculated effect sizes as the point estimate (median of the posterior) divided by the standard error (standard deviation of the posterior).
+We used path analysis [@pearl_causality_2022] to test whether treatment-associated plasticity in $\tau$ was statistically consistent with an indirect path through plasticity in stomatal traits, in response to measurement light intensity, growth light intensity, and curve-type treatments. We focused on \gi{} because it was the only individual-level trait significantly associated with $\tau$ in the selected model (see Results). We do not treat this as a randomized-treatment causal mediation analysis because \gi{} is not randomized, is estimated from the same curve as $\tau$, and could share unmeasured confounders (e.g., hydraulic status, measurement order, realized VPD trajectory) with $\tau$, violating the sequential ignorability assumption required for a causal interpretation. We assessed the plausibility of this assumption directly with a sensitivity analysis (Notes S3). We inferred the direct effect of treatments on $\tau$ from model coefficients. We estimated the indirect effect of treatments as the product of the effect of treatment on \gi{} and the effect of that trait on $\tau$ [@imai_general_2010]. We determined significant direct and indirect effects based on whether the 95% confidence intervals of the effects were different than zero. We calculated effect sizes as the point estimate (median of the posterior) divided by the standard error (standard deviation of the posterior).
 
 ### Variance decomposition and phylogenetic heritability
 
@@ -833,17 +835,17 @@ associated with each population and treatment combination.
 
 **Figure S13.** Individual-level variation in the anatomical maximum conductance does not influence lag time $\lambda$.
 
-**Figure S14.** Comparison of the observed $g_\mathrm{i}$–$\tau$ correlation against a null distribution.
-
-**Figure S15.** Causal structure of the $g_\mathrm{i}$–$\tau$ path analysis and unmeasured confounding.
-
-**Figure S16.** Sensitivity of indirect treatment effects on $\tau$ through $g_\mathrm{i}$ to residual correlation assumptions.
-
 **Notes S1.** Effects of $g_\mathrm{i}$ and guard cell length are robust to variation in VPD stimulus.
 
 **Notes S2.** The $g_\mathrm{i}$–$\tau$ association is not an artifact of the curve-fitting procedure.
 
 **Notes S3.** Sensitivity analysis of the $g_\mathrm{i}$–$\tau$ path analysis to unmeasured confounding.
+
+**Figure A.** Comparison of the observed $g_\mathrm{i}$–$\tau$ correlation against a null distribution.
+
+**Figure B.** Causal structure of the $g_\mathrm{i}$–$\tau$ path analysis and unmeasured confounding.
+
+**Figure C.** Sensitivity of indirect treatment effects on $\tau$ through $g_\mathrm{i}$ to residual correlation assumptions.
 
 ```{=latex}
 \end{flushleft}
@@ -851,10 +853,9 @@ associated with each population and treatment combination.
 
 {{< pagebreak >}}
 
-# Supporting Information
+# New Phytologist Supporting Information
 
 ```{=latex}
-\noindent New Phytologist Supporting Information\\
 Article title: Guard cell size and initial conductance influence stomatal closure kinetics\\
 Authors: Christopher D. Muir, Wei Shen Lim\\
 Article acceptance date: 18 September 2026
@@ -1533,6 +1534,14 @@ We lack data on the rate of VPD change during the wrong-way response and the ear
 
 ### Notes S2: The \gi{}-$\tau$ association is not an artifact of the curve-fitting procedure
 
+```{=latex}
+% Figs. S14-S16 are cited only within the Supporting Notes (not the main
+% text), so they are renumbered as lettered figures (A, B, C) rather than
+% continuing the S-numbered sequence used for figures cited in the main text.
+\renewcommand{\thefigure}{\Alph{figure}}
+\setcounter{figure}{0}
+```
+
 ```{r, null-sim-stats, echo = FALSE}
 null_sim_results = read_rds("../objects/null-sim-fgmax-tau.rds")
 real_cor_fgmax_tau = read_rds("../objects/real-cor-fgmax-tau.rds")
@@ -1616,3 +1625,10 @@ We found $\rho_\mathrm{estimated}$ = `r rho_hat_fmt` and $\rho^*$ = `r rho_star_
 
 knitr::include_graphics("../figures/mediation-sensitivity.pdf")
 ```
+
+## References
+
+::: {#refs-si}
+:::
+
+Imai, K., Keele, L., & Tingley, D. (2010). A general approach to causal mediation analysis. *Psychological Methods*, 15(4), 309–334. https://doi.org/10.1037/a0020761
